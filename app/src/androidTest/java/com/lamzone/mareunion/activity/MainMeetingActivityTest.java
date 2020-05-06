@@ -75,13 +75,13 @@ public class MainMeetingActivityTest {
     }
 
     @Test
-    public void toolbarItemButton_diplayed_itemMenu(){
+    public void toolbarItemButton_displayed_itemMenu(){
         onView(withId(R.id.filter_button)).perform(click());
         onView(withText("Toutes les réunions")).check(matches(isDisplayed()));
     }
 
     @Test
-    public void filterAction_display_filteredLists(){
+    public void filterActions_display_filteredLists_afterSelectedOption(){
         onView(ViewMatchers.withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(3));
         onView(withId(R.id.filter_button)).perform(click());
         onView(ViewMatchers.withText("Filtrer les réunions par date")).perform(click());

@@ -88,7 +88,7 @@ public class AddNewMeetingTest {
 
     @Test
     public void clickOnReturnButton_displayMainMeeting(){
-        onView(withId(R.id.back_button)).perform(click());
+        onView(withId(R.id.back_button_add_meeting)).perform(click());
         onView(withId(R.id.add_meeting)).check(matches(isDisplayed()));
     }
 

@@ -1,7 +1,9 @@
 package com.lamzone.mareunion.controler.activity;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -45,8 +49,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @BindView(R.id.createNewMeeting)
     Button saveButton;
-    @BindView(R.id.back_button)
-    ImageButton mbackButton;
 
     @BindView(R.id.meeting_object)
     EditText meetingObject;
@@ -73,6 +75,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     @BindView(R.id.enter_participant_mail) EditText mEnterParticipantMail;
     private String mParticipants = "";
 
+    @BindView(R.id.toolbar_new_meeting) Toolbar toolbar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +85,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         ButterKnife.bind(this);
         configureRecyclerView();
         onAddMailButtonClick();
-        clickBackButton();
         mFakeApiMeeting = DI.getFakeMeetingApi();
         mFakeApiPlace = DI.getApiFakePlace();
         addDateToMeeting();
@@ -89,6 +92,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         saveNewMeeting();
         initPlacesList();
         addNewPlace();
+        configureToolbar();
     }
 
     @Override
@@ -232,8 +236,21 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             }
         });
     }
-    private void clickBackButton(){
-        mbackButton.setOnClickListener(v -> AddNewMeetingActivity.this.finish());
+
+    private void configureToolbar() {
+        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_add_new_meeting, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        AddNewMeetingActivity.this.finish();
+        return super.onOptionsItemSelected(item);
     }
 }
 

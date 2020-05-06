@@ -3,10 +3,8 @@ package com.lamzone.mareunion.fakeServices;
 import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.model.Meeting;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 class FakeMeetingGenerator {

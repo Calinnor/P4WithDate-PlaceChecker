@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,8 +53,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     RecyclerView mRecyclerView;
     @BindView(R.id.add_meeting)
     FloatingActionButton addNewMeetingButton;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.toolbar) Toolbar toolbar;
     String mDateToFilter;
 
     @Override
@@ -65,7 +63,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
 
         ButterKnife.bind(this);
         mFakeApiMeeting = DI.getFakeMeetingApi(); //return a list
-       // mFakeApiMeeting= DI.getNewInstanceFakeApi(); //use this make a new instance at each start, so next meetings dont apears
+        // mFakeApiMeeting= DI.getNewInstanceFakeApi(); //use this make a new instance at each start, so next meetings dont apears
         mFakeApiPlace = DI.getApiFakePlace();
         this.configureToolbar();
         clickOnAddNewMeetingButton();
