@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/filter_button"
+        android:icon="@drawable/ic_filter_list_white_24dp"
+        app:showAsAction="ifRoom"
+        android:title="Filtrer">
+
+        <menu>
+
+            <item
+                android:id="@+id/filter_all_meeting"
+                android:orderInCategory="100"
+                android:title="Toutes les réunions"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/filter_meeting_by_date"
+                android:orderInCategory="100"
+                android:title="Filtrer les réunions par date"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/filter_meeting_by_place"
+                android:orderInCategory="100"
+                android:title="Filtrer les réunions par salle"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>>
+
+
+</menu>
