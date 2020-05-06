@@ -17,7 +17,7 @@ class FakeMeetingGenerator {
                     "- 8h30 -",
                     "Salle 1",
                     "Jack@Email - Joe@Email - Jess@Email",
-                    /*"17/05/21"*/setDate()),
+                    "17/05/21"),
             new Meeting(R.drawable.rose,
                     "Test réunion: sujet 2 ",
                     "- 9h30 -",
@@ -34,11 +34,5 @@ class FakeMeetingGenerator {
 
     static List<Meeting> generateFakeMeeting() {
         return new ArrayList<>(FAKE_MEETINGS);
-    }
-
-    private static String setDate(){
-    Calendar calendar = Calendar.getInstance();
-    String currentDate = String.valueOf(DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime()));
-    return currentDate;
     }
 }

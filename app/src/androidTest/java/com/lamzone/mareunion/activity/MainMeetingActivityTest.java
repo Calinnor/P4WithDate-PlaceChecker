@@ -1,5 +1,8 @@
 package com.lamzone.mareunion.activity;
 
+import android.widget.DatePicker;
+
+import androidx.test.espresso.contrib.PickerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
@@ -24,8 +27,10 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.assertThat;
 import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.lamzone.mareunion.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static org.hamcrest.core.IsNull.notNullValue;
 
@@ -69,4 +74,22 @@ public class MainMeetingActivityTest {
         onView(withId(R.id.enterDate)).check(matches(isDisplayed()));
     }
 
+    @Test
+    public void toolbarItemButton_diplayed_itemMenu(){
+        onView(withId(R.id.filter_button)).perform(click());
+        onView(withText("Toutes les réunions")).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void filterAction_display_filteredLists(){
+        onView(ViewMatchers.withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(3));
+        onView(withId(R.id.filter_button)).perform(click());
+        onView(ViewMatchers.withText("Filtrer les réunions par date")).perform(click());
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21, 06, 17));
+        onView(withId(android.R.id.button1)).perform(click());
+        onView(ViewMatchers.withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(3));
+        onView(withId(R.id.filter_button)).perform(click());
+        onView(ViewMatchers.withText("Toutes les réunions")).perform(click());
+        onView(ViewMatchers.withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(3));
+    }
 }
