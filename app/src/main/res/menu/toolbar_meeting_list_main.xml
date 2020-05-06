@@ -24,7 +24,7 @@
             <item
                 android:id="@+id/filter_meeting_by_place"
                 android:orderInCategory="100"
-                android:title="Filtrer les réunions par salle"
+                android:title="Filtrer les réunions par lieu"
                 app:showAsAction="never" />
 
         </menu>
