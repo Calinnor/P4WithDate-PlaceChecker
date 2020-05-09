@@ -13,8 +13,8 @@ public class DI {
     /**
      * implemente FakeApi
      */
-    public static FakeApiMeeting mFakeMeetingApi = new FakeMeetingService();
-    public static FakeApiPlace mApiFakePlace= new FakePlaceService();
+    private static FakeApiMeeting mFakeMeetingApi = new FakeMeetingService();
+    private static FakeApiPlace mApiFakePlace = new FakePlaceService();
 
     /**
      * @return an instance of FakeApi. Usable in app to collect values
@@ -22,13 +22,19 @@ public class DI {
     public static FakeApiMeeting getFakeMeetingApi() {
         return mFakeMeetingApi;
     }
-    public static FakeApiPlace getApiFakePlace(){ return mApiFakePlace;}
+
+    public static FakeApiPlace getApiFakePlace() {
+        return mApiFakePlace;
+    }
 
     /**
      * @return a new instance of DummyMeetingService. Usable with tests
      */
-    public static FakeApiMeeting getNewInstanceFakeApi(){
+    public static FakeApiMeeting getNewInstanceFakeApi() {
         return new FakeMeetingService();
     }
-    public static FakeApiPlace getNewInstanceFakePlaceApi() {return new FakePlaceService();}
+
+    public static FakeApiPlace getNewInstanceFakePlaceApi() {
+        return new FakePlaceService();
+    }
 }

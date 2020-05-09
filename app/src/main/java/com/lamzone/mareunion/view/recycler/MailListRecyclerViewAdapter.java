@@ -16,14 +16,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRecyclerViewAdapter.ViewHolderMail>{
+public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRecyclerViewAdapter.ViewHolderMail> {
 
     @NonNull
     @Override
     public ViewHolderMail onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).
                 inflate(R.layout.fragment_mail, parent, false);
-           return new ViewHolderMail(v, mMailsToDelete);
+        return new ViewHolderMail(v, mMailsToDelete);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRe
         return mMails.size();
     }
 
-    public interface MailsToDelete{
+    public interface MailsToDelete {
         void clickToDelete(int position);
     }
 
@@ -51,8 +51,10 @@ public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRe
 
     public static class ViewHolderMail extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        @BindView(R.id.enter_e_mail) TextView mMail;
-        @BindView(R.id.e_mail_delete_button) ImageButton mDeleteButton;
+        @BindView(R.id.enter_e_mail)
+        TextView mMail;
+        @BindView(R.id.e_mail_delete_button)
+        ImageButton mDeleteButton;
         private MailsToDelete mMailsToDelete;
 
         ViewHolderMail(@NonNull View itemView, MailsToDelete mailsToDelete) {
@@ -70,8 +72,7 @@ public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRe
         /**
          * Display the mail
          */
-        void updateMailList(String mail)
-        {
+        void updateMailList(String mail) {
             mMail.setText(mail);
         }
 

@@ -22,47 +22,23 @@ public class Meeting {
         return meetingColorTag;
     }
 
-    public void setMeetingColorTag(int meetingColorTag) {
-        this.meetingColorTag = meetingColorTag;
-    }
-
     public String getMeetingSubject() {
         return meetingSubject;
-    }
-
-    public void setMeetingSubject(String meetingSubject) {
-        this.meetingSubject = meetingSubject;
     }
 
     public String getMeetingHour() {
         return meetingHour;
     }
 
-    public void setMeetingHour(String meetingHour) {
-        this.meetingHour = meetingHour;
-    }
-
     public String getMeetingPlaceName() {
         return meetingPlaceName;
-    }
-
-    public void setMeetingPlaceName(String meetingPlaceName) {
-        this.meetingPlaceName = meetingPlaceName;
     }
 
     public String getMeetingParticipantsInformations() {
         return meetingParticipantsInformations;
     }
 
-    public void setMeetingParticipantsInformations(String meetingParticipantsInformations) {
-        this.meetingParticipantsInformations = meetingParticipantsInformations;
-    }
-
     public String getMeetingDate() {
         return meetingDate;
-    }
-
-    public void setMeetingDate(String meetingDate) {
-        this.meetingDate = meetingDate;
     }
 }

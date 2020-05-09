@@ -13,6 +13,7 @@ import java.util.List;
 public interface FakeApiPlace {
 
     List<PlaceItem> getPlaceItem();
+
     List<String> getFakePlaceNames();
 
 }

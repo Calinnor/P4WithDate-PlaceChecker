@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/toolbar_add_new_meeting" />
+            <include layout="@layout/toolbar_add_meeting" />
 
             <LinearLayout
                 android:id="@+id/layout_add_meeting"

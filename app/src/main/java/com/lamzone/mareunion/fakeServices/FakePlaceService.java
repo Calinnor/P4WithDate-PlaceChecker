@@ -4,16 +4,10 @@ import com.lamzone.mareunion.model.PlaceItem;
 
 import java.util.List;
 
-public class FakePlaceService implements FakeApiPlace{
+public class FakePlaceService implements FakeApiPlace {
 
-      private List<PlaceItem> mPlaceItems= FakePlaceGenerator.generateFakePlace();
-      private List<String> mFakePlaceNames= FakePlaceGenerator.generateFakePlaceNames();
-
-      public void setmPlaceItems(List<PlaceItem> mPlaceItems){
-          this.mPlaceItems= mPlaceItems;
-      }
-      public void setmFakePlaceNames(List<String> mFakePlaceNames) {this.mFakePlaceNames= mFakePlaceNames; }
-
+    private List<PlaceItem> mPlaceItems = FakePlaceGenerator.generateFakePlace();
+    private List<String> mFakePlaceNames = FakePlaceGenerator.generateFakePlaceNames();
 
     @Override
     public List<PlaceItem> getPlaceItem() {

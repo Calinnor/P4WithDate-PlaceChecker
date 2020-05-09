@@ -34,15 +34,17 @@ public class MyMeetingAdapter extends RecyclerView.Adapter<MyMeetingAdapter.Meet
 
     /**
      * 6/ recycleradpater creation:
+     *
      * @param meetingsList once created from main. May be implemented correctly with the declaration of the list below (to create just after crete by main)
      */
     public MyMeetingAdapter(List<Meeting> meetingsList) {
-        mMeetings= meetingsList;
+        mMeetings = meetingsList;
     }
 
 
     /**
      * 13/implement methodes
+     *
      * @return new class.viewholder(view)
      */
     @NonNull
@@ -51,7 +53,7 @@ public class MyMeetingAdapter extends RecyclerView.Adapter<MyMeetingAdapter.Meet
         /**
          * 14/inflate model view
          */
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.meeting_layout, parent, false );
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.meeting_layout, parent, false);
         return new MeetingViewHolder(v);
     }
 
@@ -97,12 +99,18 @@ public class MyMeetingAdapter extends RecyclerView.Adapter<MyMeetingAdapter.Meet
      * 11/reference xml
      */
     static class MeetingViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.meeting_color_tag) ImageView mMeetingColorTag;
-        @BindView(R.id.meeting_subject) TextView mMeetingSubject;
-        @BindView(R.id.meeting_hour) TextView mMeetingHour;
-        @BindView(R.id.meeting_place_name) TextView mMeetingPlaceName;
-        @BindView(R.id.meeting_participants_informations) TextView mMeetingParticipantsInformations;
-        @BindView(R.id.imageButton_delete_meeting) ImageButton mDeleteMeeting;
+        @BindView(R.id.meeting_color_tag)
+        ImageView mMeetingColorTag;
+        @BindView(R.id.meeting_subject)
+        TextView mMeetingSubject;
+        @BindView(R.id.meeting_hour)
+        TextView mMeetingHour;
+        @BindView(R.id.meeting_place_name)
+        TextView mMeetingPlaceName;
+        @BindView(R.id.meeting_participants_informations)
+        TextView mMeetingParticipantsInformations;
+        @BindView(R.id.imageButton_delete_meeting)
+        ImageButton mDeleteMeeting;
 
         /**
          * @param itemView 12/create constructor with xml id & super

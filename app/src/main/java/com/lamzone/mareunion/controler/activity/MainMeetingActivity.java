@@ -53,7 +53,8 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     RecyclerView mRecyclerView;
     @BindView(R.id.add_meeting)
     FloatingActionButton addNewMeetingButton;
-    @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     String mDateToFilter;
 
     @Override

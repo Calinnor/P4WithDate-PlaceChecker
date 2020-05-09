@@ -9,7 +9,7 @@ import java.util.List;
 
 class FakeMeetingGenerator {
 
-    private static List<Meeting> FAKE_MEETINGS= Arrays.asList(
+    private static List<Meeting> FAKE_MEETINGS = Arrays.asList(
             new Meeting(R.drawable.bleu,
                     "Test réunion: Objet ",
                     "- 8h30 -",

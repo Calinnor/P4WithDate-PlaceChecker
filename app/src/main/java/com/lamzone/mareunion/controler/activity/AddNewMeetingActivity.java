@@ -18,7 +18,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -58,10 +57,12 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     TextView timeDialogBox;
     private String mMeetingHour = "";
 
-    @BindView(R.id.enterDate) TextView enterDate;
+    @BindView(R.id.enterDate)
+    TextView enterDate;
     private String mMeetingDate = "";
 
-    @BindView(R.id.place_choice) TextView placeChoice;
+    @BindView(R.id.place_choice)
+    TextView placeChoice;
     @BindView(R.id.spinner_place)
     Spinner spinnerPlace;
     private int clickedColorPlaceTag;
@@ -71,11 +72,14 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private List<String> mMailsList = new ArrayList<>();
     @BindView(R.id.add_meeting_mails_list_recyclerview)
     RecyclerView mMailRecyclerView;
-    @BindView(R.id.add_mails_button) Button mAddMailsButton;
-    @BindView(R.id.enter_participant_mail) EditText mEnterParticipantMail;
+    @BindView(R.id.add_mails_button)
+    Button mAddMailsButton;
+    @BindView(R.id.enter_participant_mail)
+    EditText mEnterParticipantMail;
     private String mParticipants = "";
 
-    @BindView(R.id.toolbar_new_meeting) Toolbar toolbar;
+    @BindView(R.id.toolbar_new_meeting)
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,15 +102,12 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if (minute < 10 && hourOfDay < 10) {
-            timeDialogBox.setText("0"+hourOfDay + "H0" + minute);
-        }
-        else if (minute < 10) {
+            timeDialogBox.setText("0" + hourOfDay + "H0" + minute);
+        } else if (minute < 10) {
             timeDialogBox.setText(hourOfDay + "H0" + minute);
-        }
-        else if (hourOfDay < 10) {
-            timeDialogBox.setText("0"+hourOfDay + "H" + minute);
-        }
-        else {
+        } else if (hourOfDay < 10) {
+            timeDialogBox.setText("0" + hourOfDay + "H" + minute);
+        } else {
             timeDialogBox.setText(hourOfDay + "H" + minute);
         }
         mMeetingHour = String.valueOf(timeDialogBox);
@@ -114,16 +115,13 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        if(month<10 && dayOfMonth < 10){
-            enterDate.setText("0"+dayOfMonth + "/0" + month + "/" + year);
-        }
-        else if(month<10){
+        if (month < 10 && dayOfMonth < 10) {
+            enterDate.setText("0" + dayOfMonth + "/0" + month + "/" + year);
+        } else if (month < 10) {
             enterDate.setText(dayOfMonth + "/0" + month + "/" + year);
-        }
-        else if(dayOfMonth<10){
-            enterDate.setText("0"+dayOfMonth + month + "/" + year);
-        }
-        else {
+        } else if (dayOfMonth < 10) {
+            enterDate.setText("0" + dayOfMonth + month + "/" + year);
+        } else {
             enterDate.setText(dayOfMonth + "/" + month + "/" + year);
         }
         mMeetingDate = String.valueOf(enterDate.getText());
@@ -176,6 +174,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 clickedColorPlaceTag = clickedPlaceItem.getmPlaceColorTag();
                 mMeetingPlace = String.valueOf(placeChoice.getText());
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
@@ -199,12 +198,12 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         mAddMailsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String mail = mEnterParticipantMail.getText() +"";
+                String mail = mEnterParticipantMail.getText() + "";
 
-                if("".equals(mParticipants)) {
+                if ("".equals(mParticipants)) {
                     mParticipants = String.valueOf(mEnterParticipantMail.getText());
-                }else{
-                    mParticipants = mParticipants+", " + mEnterParticipantMail.getText();
+                } else {
+                    mParticipants = mParticipants + ", " + mEnterParticipantMail.getText();
                 }
 
                 if ("".equals(mParticipants)) {

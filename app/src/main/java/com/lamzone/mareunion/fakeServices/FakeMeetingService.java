@@ -6,11 +6,7 @@ import java.util.List;
 
 public class FakeMeetingService implements FakeApiMeeting {
 
-    private List<Meeting> mMeetings= FakeMeetingGenerator.generateFakeMeeting();
-
-    public void setmMeetings(List<Meeting> mMeetings) {
-        this.mMeetings = mMeetings;
-    }
+    private List<Meeting> mMeetings = FakeMeetingGenerator.generateFakeMeeting();
 
     @Override
     public List<Meeting> getMeeting() {

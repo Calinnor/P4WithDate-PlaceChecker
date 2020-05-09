@@ -19,7 +19,7 @@ public class PlaceItem {
     }
 
     public String getmPlaceName() {
-        return "Salle "+mPlaceName;
+        return "Salle " + mPlaceName;
     }
 
 }
