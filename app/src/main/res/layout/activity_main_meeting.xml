@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main_meeting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_main_meeting"
     tools:context=".controler.activity.MainMeetingActivity">
+
+    <TextView
+        android:id="@+id/lbl_no_task"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mareu"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="Votre liste de réunions est vide. Veuillez ajouter une réunion."
+        android:textColor="#E30F2F"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_meeting"
@@ -20,11 +33,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_white_24dp" />
 
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
 
         <LinearLayout
             android:id="@+id/layout_recyclerview"
@@ -39,6 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:layoutManager="LinearLayoutManager" />
+
+
         </LinearLayout>
     </ScrollView>
 

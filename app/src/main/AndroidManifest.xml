@@ -12,7 +12,8 @@
 
         <activity android:name=".controler.activity.AddNewMeetingActivity"></activity>
 
-        <activity android:name=".controler.activity.MainMeetingActivity">
+        <activity android:name=".controler.activity.MainMeetingActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

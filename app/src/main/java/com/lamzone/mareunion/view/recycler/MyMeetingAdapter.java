@@ -121,4 +121,14 @@ public class MyMeetingAdapter extends RecyclerView.Adapter<MyMeetingAdapter.Meet
         }
     }
 
+    public void updateMeetings(List<Meeting> meetings){
+        this.mMeetings = meetings;
+        notifyDataSetChanged();
+    }
+
+    public void clearMeetings() {
+        this.mMeetings.clear();
+        notifyDataSetChanged();
+    }
+
 }

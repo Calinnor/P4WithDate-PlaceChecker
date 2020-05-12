@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/back_button_add_meeting"
-        android:icon="@drawable/ic_arrow_back_black_24dp"
+        android:icon="@drawable/ic_arrow_back_white_24dp"
         app:showAsAction="ifRoom"
         android:title="Retour">
     </item>

@@ -178,15 +178,28 @@
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/fragment_mail" />
                 </LinearLayout>
+<!--a ameliorer !!!-->
+<!--                <Button-->
+<!--                    android:id="@+id/createNewMeeting"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="Sauvegardez la réunion"-->
+<!--                    android:textColor="#322D39"-->
+<!--                    android:textStyle="bold" />-->
 
-                <Button
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/createNewMeeting"
+                    android:shadowColor="#AEAAAF"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:backgroundTint="@color/colorPrimary"
                     android:text="Sauvegardez la réunion"
-                    android:textColor="#322D39"
-                    android:textStyle="bold" />
+                    android:textColor="#F7F5F8"
+                    android:textStyle="bold"/>
+
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

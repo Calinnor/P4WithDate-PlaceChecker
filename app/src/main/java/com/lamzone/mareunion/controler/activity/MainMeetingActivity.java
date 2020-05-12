@@ -10,11 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lamzone.mareunion.R;
@@ -56,6 +60,10 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     String mDateToFilter;
+    @BindView(R.id.lbl_no_task)
+    TextView textViewNothingToShow;
+
+    private MyMeetingAdapter myMeetingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +72,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
 
         ButterKnife.bind(this);
         mFakeApiMeeting = DI.getFakeMeetingApi(); //return a list
-        // mFakeApiMeeting= DI.getNewInstanceFakeApi(); //use this make a new instance at each start, so next meetings dont apears
         mFakeApiPlace = DI.getApiFakePlace();
         this.configureToolbar();
         clickOnAddNewMeetingButton();
@@ -76,18 +83,35 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         /**
          * 5/ once name class of recycler given create class (MyMeetingAdapter)
          */
+    }
 
-        /**
-         * init list may be place after recycler configuration else=crash
-         */
-        initList();
+    @Override
+    public void onConfigurationChanged(@NonNull Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        initEmptyList();
     }
 
     /**
      * initiate then given life to list of meeting
      */
     private void initList() {
-        mRecyclerView.setAdapter(new MyMeetingAdapter(mFakeApiMeeting.getMeeting()));
+        myMeetingAdapter = new MyMeetingAdapter(mFakeApiMeeting.getMeeting());
+        mRecyclerView.setAdapter(myMeetingAdapter);
+        if (mFakeApiMeeting.getMeeting().size() == 0) {
+            textViewNothingToShow.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            textViewNothingToShow.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void initEmptyList() {
+        //mFakeApiMeeting.getMeeting().clear();
+        myMeetingAdapter.updateMeetings(mFakeApiMeeting.getMeeting());
+        //myMeetingAdapter.clearMeetings();
+        //mRecyclerView.setAdapter(new MyMeetingAdapter(mFakeApiMeeting.getMeeting()));
+        //notifychanged
     }
 
     @Override
@@ -113,7 +137,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filter_all_meeting:
-                initList();
+                initEmptyList();
                 break;
             case R.id.filter_meeting_by_date:
                 DialogFragment datePicker = new DatePickerFragment();
@@ -186,7 +210,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         builderRoom.setTitle("Choisissez une Salle");
         builderRoom.setSingleChoiceItems(placeNamesToFiltered, -1, (dialog, placeName) -> places[0] = placeNamesToFiltered[placeName]);
         builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initListPlaceName(places[0]));
-        builderRoom.setNegativeButton("Annuler", (dialog, resetButton) -> initList());
+        builderRoom.setNegativeButton("Annuler", (dialog, resetButton) -> initEmptyList());
         AlertDialog dialogRoom = builderRoom.create();
         dialogRoom.show();
     }
@@ -211,5 +235,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         }
         mRecyclerView.setAdapter(new MyMeetingAdapter(mMeetingDateFiltered));
     }
+
 
 }

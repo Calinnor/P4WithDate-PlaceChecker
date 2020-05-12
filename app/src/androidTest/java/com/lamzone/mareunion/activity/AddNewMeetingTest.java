@@ -8,11 +8,13 @@ import androidx.test.rule.ActivityTestRule;
 import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.activity.AddNewMeetingActivity;
 import com.lamzone.mareunion.controler.activity.MainMeetingActivity;
+import com.lamzone.mareunion.utils.DeleteViewAction;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static com.lamzone.mareunion.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -114,4 +116,30 @@ public class AddNewMeetingTest {
         onView(withId(R.id.createNewMeeting)).perform(click());
         onView(withId(R.id.add_meeting)).check(matches(isDisplayed()));
     }
+
+    @Test
+    public void useDeleteAMeetingButton_DisplayMeetingList_MinusOne() {
+        int meetingSizeToFind = 0;
+        onView(withId(R.id.meeting_object)).perform(replaceText("Test"));
+
+        onView(withId(R.id.spinner_place)).perform(click());
+        onData(anything()).atPosition(0).perform(click());
+
+        onView(withId(R.id.time_start_dialogbox)).perform(click());
+        onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.enterDate)).perform(click());
+        onView(isAssignableFrom(DatePicker.class)).perform(setDate(20, 10, 30));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail"));
+        onView(withId(R.id.add_mails_button)).perform(scrollTo(), click());
+
+        onView(withId(R.id.createNewMeeting)).perform(click());
+
+        onView(withId(R.id.list_meetings_for_recyclerView)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(meetingSizeToFind));
+    }
+
 }

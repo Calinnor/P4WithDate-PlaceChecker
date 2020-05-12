@@ -2,10 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_main_meeting_land"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_main_meeting_land"
     tools:context=".controler.activity.MainMeetingActivity">
+
+    <TextView
+        android:id="@+id/lbl_no_task"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mareu"
+        android:gravity="center"
+        android:scaleType="fitCenter"
+        android:text="Votre liste de réunions est vide. Veuillez ajouter une réunion."
+        android:textColor="#E30F2F"
+        android:textSize="22sp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_meeting"
@@ -42,14 +56,14 @@
                     app:layoutManager="LinearLayoutManager" />
             </LinearLayout>
 
-<!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--                android:id="@+id/add_meeting"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginRight="16dp"-->
-<!--                android:layout_gravity="end"-->
-<!--                app:backgroundTint="#DA0323"-->
-<!--                app:srcCompat="@drawable/ic_add_white_24dp" />-->
+            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--                android:id="@+id/add_meeting"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginRight="16dp"-->
+            <!--                android:layout_gravity="end"-->
+            <!--                app:backgroundTint="#DA0323"-->
+            <!--                app:srcCompat="@drawable/ic_add_white_24dp" />-->
         </LinearLayout>
     </ScrollView>
 
