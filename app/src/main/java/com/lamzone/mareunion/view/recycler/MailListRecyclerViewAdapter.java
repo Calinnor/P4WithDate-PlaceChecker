@@ -69,9 +69,6 @@ public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRe
             mMailsToDelete.clickToDelete(getAdapterPosition());
         }
 
-        /**
-         * Display the mail
-         */
         void updateMailList(String mail) {
             mMail.setText(mail);
         }
