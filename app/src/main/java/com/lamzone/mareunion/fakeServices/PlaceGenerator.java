@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class FakePlaceGenerator {
+class PlaceGenerator {
 
     private static List<PlaceItem> FAKE_PLACE = Arrays.asList(
             new PlaceItem(R.drawable.bleumarbre, "1"),

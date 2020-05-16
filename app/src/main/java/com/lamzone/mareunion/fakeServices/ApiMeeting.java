@@ -4,7 +4,7 @@ import com.lamzone.mareunion.model.Meeting;
 
 import java.util.List;
 
-public interface FakeApiMeeting {
+public interface ApiMeeting {
 
     List<Meeting> getMeeting();
 
@@ -15,6 +15,10 @@ public interface FakeApiMeeting {
     void deleteMeeting(Meeting meeting);
 
     void addNewMeeting(Meeting meeting);
+
+    List<Meeting> filterDate(String date);
+
+    List<String> filterPlaceName();
 
 }
 

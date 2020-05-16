@@ -1,9 +1,9 @@
 package com.lamzone.mareunion.di;
 
-import com.lamzone.mareunion.fakeServices.FakeApiMeeting;
-import com.lamzone.mareunion.fakeServices.FakeApiPlace;
-import com.lamzone.mareunion.fakeServices.FakeMeetingService;
-import com.lamzone.mareunion.fakeServices.FakePlaceService;
+import com.lamzone.mareunion.fakeServices.ApiMeeting;
+import com.lamzone.mareunion.fakeServices.ApiPlace;
+import com.lamzone.mareunion.fakeServices.MeetingService;
+import com.lamzone.mareunion.fakeServices.PlaceService;
 
 /**
  * create instance of FakeMeetingService using ApiService service
@@ -13,28 +13,28 @@ public class DI {
     /**
      * implemente FakeApi
      */
-    private static FakeApiMeeting mFakeMeetingApi = new FakeMeetingService();
-    private static FakeApiPlace mApiFakePlace = new FakePlaceService();
+    private static ApiMeeting mFakeMeetingApi = new MeetingService();
+    private static ApiPlace mApiFakePlace = new PlaceService();
 
     /**
      * @return an instance of FakeApi. Usable in app to collect values
      */
-    public static FakeApiMeeting getFakeMeetingApi() {
+    public static ApiMeeting getFakeMeetingApi() {
         return mFakeMeetingApi;
     }
 
-    public static FakeApiPlace getApiFakePlace() {
+    public static ApiPlace getApiFakePlace() {
         return mApiFakePlace;
     }
 
     /**
      * @return a new instance of DummyMeetingService. Usable with tests
      */
-    public static FakeApiMeeting getNewInstanceFakeApi() {
-        return new FakeMeetingService();
+    public static ApiMeeting getNewInstanceFakeApi() {
+        return new MeetingService();
     }
 
-    public static FakeApiPlace getNewInstanceFakePlaceApi() {
-        return new FakePlaceService();
+    public static ApiPlace getNewInstanceFakePlaceApi() {
+        return new PlaceService();
     }
 }

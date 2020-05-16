@@ -27,8 +27,8 @@ import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.fragment.DatePickerFragment;
 import com.lamzone.mareunion.controler.fragment.TimePickeFragment;
 import com.lamzone.mareunion.di.DI;
-import com.lamzone.mareunion.fakeServices.FakeApiMeeting;
-import com.lamzone.mareunion.fakeServices.FakeApiPlace;
+import com.lamzone.mareunion.fakeServices.ApiMeeting;
+import com.lamzone.mareunion.fakeServices.ApiPlace;
 import com.lamzone.mareunion.model.Meeting;
 import com.lamzone.mareunion.model.PlaceItem;
 import com.lamzone.mareunion.view.recycler.MailListRecyclerViewAdapter;
@@ -43,8 +43,8 @@ import butterknife.ButterKnife;
 
 public class AddNewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, MailListRecyclerViewAdapter.MailsToDelete {
 
-    private FakeApiMeeting mFakeApiMeeting;
-    private FakeApiPlace mFakeApiPlace;
+    private ApiMeeting mApiMeeting;
+    private ApiPlace mApiPlace;
 
     @BindView(R.id.createNewMeeting)
     Button saveButton;
@@ -89,8 +89,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         ButterKnife.bind(this);
         configureRecyclerView();
         onAddMailButtonClick();
-        mFakeApiMeeting = DI.getFakeMeetingApi();
-        mFakeApiPlace = DI.getApiFakePlace();
+        mApiMeeting = DI.getFakeMeetingApi();
+        mApiPlace = DI.getApiFakePlace();
         addDateToMeeting();
         addTimeToMeeting();
         saveNewMeeting();
@@ -135,7 +135,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 mParticipants,
                 enterDate.getText().toString()
         );
-        mFakeApiMeeting.addNewMeeting(reunion);
+        mApiMeeting.addNewMeeting(reunion);
         finish();
     }
 
@@ -160,7 +160,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     }
 
     private void initPlacesList() {
-        mPlaceItemsList = new ArrayList<>(mFakeApiPlace.getPlaceItem());
+        mPlaceItemsList = new ArrayList<>(mApiPlace.getPlaceItem());
     }
 
     private void addNewPlace() {

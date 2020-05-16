@@ -8,6 +8,8 @@ import androidx.test.rule.ActivityTestRule;
 import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.activity.AddNewMeetingActivity;
 import com.lamzone.mareunion.controler.activity.MainMeetingActivity;
+import com.lamzone.mareunion.di.DI;
+import com.lamzone.mareunion.fakeServices.ApiMeeting;
 import com.lamzone.mareunion.utils.DeleteViewAction;
 
 import org.junit.Before;
@@ -50,6 +52,11 @@ public class AddNewMeetingTest {
         assertThat(mMainMeetingActivity, notNullValue());
         AddNewMeetingActivity mAddNewMeetingActivity = (AddNewMeetingActivity) mActivityNewMeetingRule.getActivity();
         assertThat(mAddNewMeetingActivity, notNullValue());
+    }
+
+    @Test
+    public void useDeleteMeeting_DisplayMeetingList_MinusOne() {
+
     }
 
 
@@ -117,29 +124,6 @@ public class AddNewMeetingTest {
         onView(withId(R.id.add_meeting)).check(matches(isDisplayed()));
     }
 
-    @Test
-    public void useDeleteAMeetingButton_DisplayMeetingList_MinusOne() {
-        int meetingSizeToFind = 0;
-        onView(withId(R.id.meeting_object)).perform(replaceText("Test"));
 
-        onView(withId(R.id.spinner_place)).perform(click());
-        onData(anything()).atPosition(0).perform(click());
-
-        onView(withId(R.id.time_start_dialogbox)).perform(click());
-        onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
-        onView(withId(android.R.id.button1)).perform(click());
-
-        onView(withId(R.id.enterDate)).perform(click());
-        onView(isAssignableFrom(DatePicker.class)).perform(setDate(20, 10, 30));
-        onView(withId(android.R.id.button1)).perform(click());
-
-        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail"));
-        onView(withId(R.id.add_mails_button)).perform(scrollTo(), click());
-
-        onView(withId(R.id.createNewMeeting)).perform(click());
-
-        onView(withId(R.id.list_meetings_for_recyclerView)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
-        onView(withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(meetingSizeToFind));
-    }
 
 }
