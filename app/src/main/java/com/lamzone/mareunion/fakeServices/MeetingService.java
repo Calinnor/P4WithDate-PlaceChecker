@@ -28,8 +28,6 @@ public class MeetingService implements ApiMeeting {
         mMeetings.add(meeting);
     }
 
-
-
     @Override
     public List<Meeting> filterDate(String mDateToFilter) {
         List<Meeting> mMeetingDateFiltered = new ArrayList<>();
@@ -41,9 +39,12 @@ public class MeetingService implements ApiMeeting {
     }
 
     @Override
-    public List<String> filterPlaceName() {
-
-
-        return filterPlaceName();
+    public List<Meeting> filterPlaceName(String placeItem) {
+        List<Meeting> mMeetingPlaceFiltered = new ArrayList<>();
+        for (Meeting meeting : mMeetings) {
+            if (meeting.getMeetingPlaceName().equals(placeItem))
+                mMeetingPlaceFiltered.add(meeting);
+        }
+        return mMeetingPlaceFiltered;
     }
 }

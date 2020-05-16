@@ -1,5 +1,6 @@
 package com.lamzone.mareunion.fakeServices;
 
+import com.lamzone.mareunion.model.Meeting;
 import com.lamzone.mareunion.model.PlaceItem;
 
 import java.util.List;

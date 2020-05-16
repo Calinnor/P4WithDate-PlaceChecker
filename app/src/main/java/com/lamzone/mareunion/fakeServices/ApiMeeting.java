@@ -18,7 +18,7 @@ public interface ApiMeeting {
 
     List<Meeting> filterDate(String date);
 
-    List<String> filterPlaceName();
+    List<Meeting> filterPlaceName(String placeItem);
 
 }
 

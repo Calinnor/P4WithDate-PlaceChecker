@@ -1,11 +1,12 @@
 package com.lamzone.mareunion.fakeServices;
 
+import com.lamzone.mareunion.model.Meeting;
 import com.lamzone.mareunion.model.PlaceItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceService implements ApiPlace {
-
     private List<PlaceItem> mPlaceItems = PlaceGenerator.generateFakePlace();
     private List<String> mFakePlaceNames = PlaceGenerator.generateFakePlaceNames();
 
@@ -18,6 +19,7 @@ public class PlaceService implements ApiPlace {
     public List<String> getFakePlaceNames() {
         return mFakePlaceNames;
     }
+
 
 
 }

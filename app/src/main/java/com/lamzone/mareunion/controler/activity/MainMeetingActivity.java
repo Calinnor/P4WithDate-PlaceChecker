@@ -194,12 +194,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     }
 
     private void initListPlaceName(String placeName) {
-        mMeeting = mApiMeeting.getMeeting();
-        List<Meeting> mMeetingPlaceFiltered = new ArrayList<>();
-        for (Meeting meeting : mMeeting) {
-            if (meeting.getMeetingPlaceName().equals(placeName)) mMeetingPlaceFiltered.add(meeting);
-        }
-        mRecyclerView.setAdapter(new MyMeetingAdapter(mMeetingPlaceFiltered));
+        mRecyclerView.setAdapter(new MyMeetingAdapter( mApiMeeting.filterPlaceName(placeName)));
     }
 
     /**
