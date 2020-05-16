@@ -101,30 +101,14 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        if (minute < 10 && hourOfDay < 10) {
-            timeDialogBox.setText("0" + hourOfDay + "H0" + minute);
-        } else if (minute < 10) {
-            timeDialogBox.setText(hourOfDay + "H0" + minute);
-        } else if (hourOfDay < 10) {
-            timeDialogBox.setText("0" + hourOfDay + "H" + minute);
-        } else {
-            timeDialogBox.setText(hourOfDay + "H" + minute);
-        }
-        mMeetingHour = String.valueOf(timeDialogBox);
+        timeDialogBox.setText(mApiMeeting.timePickerSet(hourOfDay, minute));
+        mMeetingHour = mApiMeeting.timePickerSet(hourOfDay, minute);
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        if (month < 10 && dayOfMonth < 10) {
-            enterDate.setText("0" + dayOfMonth + "/0" + month + "/" + year);
-        } else if (month < 10) {
-            enterDate.setText(dayOfMonth + "/0" + month + "/" + year);
-        } else if (dayOfMonth < 10) {
-            enterDate.setText("0" + dayOfMonth + month + "/" + year);
-        } else {
-            enterDate.setText(dayOfMonth + "/" + month + "/" + year);
-        }
-        mMeetingDate = String.valueOf(enterDate.getText());
+        enterDate.setText(mApiMeeting.datePickerSet(year, month, dayOfMonth));
+        mMeetingDate = mApiMeeting.datePickerSet(year, month, dayOfMonth);
     }
 
     public void addNewMeeting() {

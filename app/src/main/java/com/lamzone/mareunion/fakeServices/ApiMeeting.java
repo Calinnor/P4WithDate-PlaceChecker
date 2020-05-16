@@ -1,5 +1,7 @@
 package com.lamzone.mareunion.fakeServices;
 
+import android.widget.TextView;
+
 import com.lamzone.mareunion.model.Meeting;
 
 import java.util.List;
@@ -19,6 +21,10 @@ public interface ApiMeeting {
     List<Meeting> filterDate(String date);
 
     List<Meeting> filterPlaceName(String placeItem);
+
+    String timePickerSet (int hourOfDay, int minute);
+
+    String datePickerSet (int year, int month, int dayOfMonth);
 
 }
 
