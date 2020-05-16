@@ -193,10 +193,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         });
     }
 
-    private void initListPlaceName(String placeName) {
-        mRecyclerView.setAdapter(new MyMeetingAdapter( mApiMeeting.filterPlaceName(placeName)));
-    }
-
     /**
      * this dialog box is to high for me. I'll try to find something else...but it work
      */
@@ -208,7 +204,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
         builderRoom.setTitle("Choisissez une Salle");
         builderRoom.setSingleChoiceItems(placeNamesToFiltered, -1, (dialog, placeName) -> places[0] = placeNamesToFiltered[placeName]);
-        builderRoom.setPositiveButton("OK", (dialogInterface, i) -> initListPlaceName(places[0]));
+        builderRoom.setPositiveButton("OK", (dialogInterface, i) -> mRecyclerView.setAdapter(new MyMeetingAdapter( mApiMeeting.filterPlaceName(places[0]))));
         builderRoom.setNegativeButton("Annuler", (dialog, resetButton) -> initEmptyList());
         AlertDialog dialogRoom = builderRoom.create();
         dialogRoom.show();
