@@ -73,7 +73,7 @@ public class MeetingService implements ApiMeeting {
         } else if (month < 10) {
             enterDate=dayOfMonth + "/0" + month + "/" + year;
         } else if (dayOfMonth < 10) {
-            enterDate="0" + dayOfMonth + month + "/" + year;
+            enterDate="0" + dayOfMonth+"/" + month + "/" + year;
         } else {
             enterDate=dayOfMonth + "/" + month + "/" + year;
         }

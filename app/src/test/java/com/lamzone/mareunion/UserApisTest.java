@@ -9,6 +9,9 @@ import com.lamzone.mareunion.model.PlaceItem;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -24,6 +27,10 @@ public class UserApisTest {
 
     private ApiMeeting mApiMeeting;
     private ApiPlace mApiPlace;
+    private List<Meeting> mMeetingDateFiltered = new ArrayList<>();
+    List<Meeting> mMeetingPlaceFiltered = new ArrayList<>();
+    private String timeDialogBox = "";
+    private String enterDate = "";
 
     @Before
     public void setupPlace() {
@@ -62,16 +69,16 @@ public class UserApisTest {
 
     @Test
     public void addMeetingWithSucces() {
-    Meeting meetingToAdd = new Meeting(R.drawable.bleu,
-        "Test réunion: Objet ",
-        "- 8h30 -",
-        "Salle 1",
-        "Jack@Email - Joe@Email - Jess@Email",
-        "17/05/21" );
+        Meeting meetingToAdd = new Meeting(R.drawable.bleu,
+                "Test réunion: Objet ",
+                "- 8h30 -",
+                "Salle 1",
+                "Jack@Email - Joe@Email - Jess@Email",
+                "17/05/21");
         int baseSize = mApiMeeting.getMeeting().size();
         assertFalse(mApiMeeting.getMeeting().contains(meetingToAdd));
         mApiMeeting.addNewMeeting(meetingToAdd);
-        assertTrue(mApiMeeting.getMeeting().size() == baseSize + 1 );
+        assertTrue(mApiMeeting.getMeeting().size() == baseSize + 1);
         assertTrue(mApiMeeting.getMeeting().contains(meetingToAdd));
     }
 
@@ -82,9 +89,9 @@ public class UserApisTest {
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingToDelete);
-        int sizeToFind = mApiMeeting.getMeeting().size() -1;
+        int sizeToFind = mApiMeeting.getMeeting().size() - 1;
         assertTrue(mApiMeeting.getMeeting().contains(meetingToDelete));
         mApiMeeting.deleteMeeting(meetingToDelete);
         assertFalse(mApiMeeting.getMeeting().contains(meetingToDelete));
@@ -98,7 +105,7 @@ public class UserApisTest {
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting meetingToDelete = mApiMeeting.getMeeting().get(mApiMeeting.getMeeting().size() + 1);
         mApiMeeting.deleteMeeting(meetingToDelete);
@@ -111,19 +118,19 @@ public class UserApisTest {
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         Meeting meetingTwoToAdd = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet ",
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingOneToAdd);
         mApiMeeting.addNewMeeting(meetingTwoToAdd);
         Meeting meetingToDelete = mApiMeeting.getMeeting().get(0);
         mApiMeeting.deleteMeeting(meetingToDelete);
         assertTrue(mApiMeeting.getMeeting().get(0) != meetingToDelete);
-        assertFalse( mApiMeeting.getMeeting().contains(meetingToDelete));
+        assertFalse(mApiMeeting.getMeeting().contains(meetingToDelete));
     }
 
     @Test
@@ -133,7 +140,7 @@ public class UserApisTest {
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting expectedMeeting = mApiMeeting.getMeeting().get(0);
         assertEquals(mApiMeeting.getMeeting().get(0), expectedMeeting);
@@ -146,7 +153,7 @@ public class UserApisTest {
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting exceptedMeeting = mApiMeeting.getMeeting().get(mApiMeeting.getMeeting().size() + 1);
         assertTrue(mApiMeeting.getMeeting().contains(exceptedMeeting));
@@ -154,12 +161,13 @@ public class UserApisTest {
 
     @Test
     public void getMeetingWithSucces() {
+        mApiMeeting.getMeeting().clear();
         Meeting meetingToAdd = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet ",
                 "- 8h30 -",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21" );
+                "17/05/21");
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting exceptedMeeting = mApiMeeting.getMeeting().get(0);
         assertNotNull(exceptedMeeting);
@@ -187,23 +195,81 @@ public class UserApisTest {
         assertEquals(mApiPlace.getFakePlaceNames().get(3), exceptedPlaceName);
     }
 
+    /**
+     * filter tests
+     */
     @Test
-    public void filterDateWithSuces(){
-        //entrer deux  dates differentes verifier si les dates sont presente , verifier si l'affichage donne bien une date
-        //filterdate
-    };
+    public void filterDateWithSuces() {
+        mApiMeeting.getMeeting().clear();
+        Meeting meetingToAdd = new Meeting(R.drawable.bleu,
+                "Test réunion: Objet ",
+                "- 8h30 -",
+                "Salle 1",
+                "Jack@Email - Joe@Email - Jess@Email",
+                "17/05/21");
+        Meeting secondMeetingToAdd = new Meeting(R.drawable.bleu,
+                "Test2 réunion: Objet ",
+                "- 9h30 -",
+                "Salle21",
+                "Jack@Email - Joe@Email - Jess@Email",
+                "18/05/21");
+        mApiMeeting.addNewMeeting(meetingToAdd);
+        mApiMeeting.addNewMeeting(secondMeetingToAdd);
+        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        mMeetingDateFiltered = mApiMeeting.filterDate("17/05/21");
+        assertTrue(mMeetingDateFiltered.contains(meetingToAdd));
+        assertFalse(mMeetingDateFiltered.contains(secondMeetingToAdd));
+    }
 
     @Test
-    public void filterPlaceName(){};//filterplacename
+    public void filterPlaceNameWithSucces() {
+        mApiMeeting.getMeeting().clear();
+        Meeting meetingToAdd = new Meeting(R.drawable.bleu,
+                "Test réunion: Objet ",
+                "- 8h30 -",
+                "Salle 1",
+                "Jack@Email - Joe@Email - Jess@Email",
+                "17/05/21");
+        Meeting secondMeetingToAdd = new Meeting(R.drawable.bleu,
+                "Test2 réunion: Objet ",
+                "- 9h30 -",
+                "Salle2",
+                "Jack@Email - Joe@Email - Jess@Email",
+                "18/05/21");
+        mApiMeeting.addNewMeeting(meetingToAdd);
+        mApiMeeting.addNewMeeting(secondMeetingToAdd);
+        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        mMeetingPlaceFiltered = mApiMeeting.filterPlaceName("Salle2");
+        assertTrue(mMeetingPlaceFiltered.contains(secondMeetingToAdd));
+        assertFalse(mMeetingPlaceFiltered.contains(meetingToAdd));
+    }
+
+    /**
+     * display date and time modification tests
+     */
+    @Test
+    public void timePickerSetModifyTimeWithSucces() {
+        timeDialogBox = mApiMeeting.timePickerSet(5, 8);
+        assertTrue(timeDialogBox.contains("05H08"));
+        timeDialogBox = mApiMeeting.timePickerSet(15, 8);
+        assertTrue(timeDialogBox.contains("15H08"));
+        timeDialogBox = mApiMeeting.timePickerSet(5, 18);
+        assertTrue(timeDialogBox.contains("05H18"));
+        timeDialogBox = mApiMeeting.timePickerSet(15, 18);
+        assertTrue(timeDialogBox.contains("15H18"));
+    }
 
     @Test
-    public void timePickerSet(){};
-
-    @Test
-    public void datePickerSet(){};
-
-
-
+    public void datePickerSetModifyDateWithSucces() {
+        enterDate = mApiMeeting.datePickerSet(20, 5, 6);
+        assertTrue(enterDate.contains("06/05/20"));
+        enterDate = mApiMeeting.datePickerSet(20, 6, 15);
+        assertTrue(enterDate.contains("15/06/20"));
+        enterDate = mApiMeeting.datePickerSet(20, 10, 15);
+        assertTrue(enterDate.contains("15/10/20"));
+        enterDate = mApiMeeting.datePickerSet(20, 10, 5);
+        assertTrue(enterDate.contains("05/10/20"));
+    }
 
 
 }
