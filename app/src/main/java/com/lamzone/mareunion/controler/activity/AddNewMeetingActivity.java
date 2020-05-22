@@ -191,7 +191,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 }
 
                 if ("".equals(mParticipants) || !mParticipants.matches(".+@.+\\.[a-z]+")) {
-                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir les informations concernant le/les participants avant de sauvegarder leurs informations.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir les informations concernant le/les participants correctement avant de sauvegarder leurs informations.", Toast.LENGTH_SHORT).show();
                 } else {
                     mMailsList.add(mail);
                     initListMails(mMailsList);
