@@ -1,7 +1,5 @@
 package com.lamzone.mareunion.fakeServices;
 
-import android.widget.TextView;
-
 import com.lamzone.mareunion.model.Meeting;
 
 import java.util.List;

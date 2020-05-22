@@ -187,4 +187,23 @@ public class UserApisTest {
         assertEquals(mApiPlace.getFakePlaceNames().get(3), exceptedPlaceName);
     }
 
+    @Test
+    public void filterDateWithSuces(){
+        //entrer deux  dates differentes verifier si les dates sont presente , verifier si l'affichage donne bien une date
+        //filterdate
+    };
+
+    @Test
+    public void filterPlaceName(){};//filterplacename
+
+    @Test
+    public void timePickerSet(){};
+
+    @Test
+    public void datePickerSet(){};
+
+
+
+
+
 }

@@ -1,9 +1,7 @@
 package com.lamzone.mareunion.fakeServices;
 
-import com.lamzone.mareunion.model.Meeting;
 import com.lamzone.mareunion.model.PlaceItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceService implements ApiPlace {

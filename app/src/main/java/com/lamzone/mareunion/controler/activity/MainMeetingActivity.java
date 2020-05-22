@@ -95,26 +95,12 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
     private void initList() {
         myMeetingAdapter = new MyMeetingAdapter(mApiMeeting.getMeeting());
         mRecyclerView.setAdapter(myMeetingAdapter);
-//        if (mFakeApiMeeting.getMeeting().size() == 0) {
-//            textViewNothingToShow.setVisibility(View.VISIBLE);
-//            mRecyclerView.setVisibility(View.GONE);
-//        } else {
-//            textViewNothingToShow.setVisibility(View.GONE);
-//            mRecyclerView.setVisibility(View.VISIBLE);
-//        }
         selectVisibility();
     }
 
     private void initEmptyList() {
         mApiMeeting.getMeeting().clear();
         myMeetingAdapter.updateMeetings(mApiMeeting.getMeeting());
-//        if (mFakeApiMeeting.getMeeting().size() == 0) {
-//            textViewNothingToShow.setVisibility(View.VISIBLE);
-//            mRecyclerView.setVisibility(View.GONE);
-//        } else {
-//            textViewNothingToShow.setVisibility(View.GONE);
-//            mRecyclerView.setVisibility(View.VISIBLE);
-//        }
         selectVisibility();
     }
 

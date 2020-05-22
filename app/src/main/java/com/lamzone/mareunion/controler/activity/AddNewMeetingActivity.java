@@ -114,7 +114,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     public void addNewMeeting() {
         Meeting reunion = new Meeting(clickedColorPlaceTag,
                 mObjectOfMeeting,
-                "- " + timeDialogBox.getText().toString() + " -",
+                "-" + timeDialogBox.getText().toString() + "-",
                 placeChoice.getText().toString(),
                 mParticipants,
                 enterDate.getText().toString()
@@ -190,7 +190,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                     mParticipants = mParticipants + ", " + mEnterParticipantMail.getText();
                 }
 
-                if ("".equals(mParticipants)) {
+                if ("".equals(mParticipants) || !mParticipants.matches(".+@.+\\.[a-z]+")) {
                     Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir les informations concernant le/les participants avant de sauvegarder leurs informations.", Toast.LENGTH_LONG).show();
                 } else {
                     mMailsList.add(mail);
