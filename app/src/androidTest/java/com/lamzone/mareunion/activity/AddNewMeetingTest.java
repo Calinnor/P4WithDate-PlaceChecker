@@ -3,8 +3,6 @@ package com.lamzone.mareunion.activity;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import androidx.test.espresso.contrib.PickerActions;
-import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
 import com.lamzone.mareunion.R;
@@ -17,7 +15,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
-import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static com.lamzone.mareunion.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
