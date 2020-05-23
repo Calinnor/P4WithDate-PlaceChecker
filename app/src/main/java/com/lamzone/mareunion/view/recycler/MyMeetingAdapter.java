@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.lamzone.mareunion.R;
-import com.lamzone.mareunion.model.Meeting;
+import com.lamzone.mareunion.model.items.Meeting;
 import com.lamzone.mareunion.view.event.DeleteMeetingEvent;
 
 import org.greenrobot.eventbus.EventBus;

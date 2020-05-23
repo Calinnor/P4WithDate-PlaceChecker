@@ -1,7 +1,7 @@
-package com.lamzone.mareunion.fakeServices;
+package com.lamzone.mareunion.model.services;
 
 import com.lamzone.mareunion.R;
-import com.lamzone.mareunion.model.PlaceItem;
+import com.lamzone.mareunion.model.items.PlaceItem;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.List;
 
 class PlaceGenerator {
 
-    private static List<PlaceItem> FAKE_PLACE = Arrays.asList(
+    private static List<PlaceItem> PLACE = Arrays.asList(
             new PlaceItem(R.drawable.bleumarbre, "1"),
             new PlaceItem(R.drawable.rose, "2"),
             new PlaceItem(R.drawable.vert, "3"),
@@ -22,15 +22,15 @@ class PlaceGenerator {
             new PlaceItem(R.drawable.rouge, "10")
     );
 
-    static List<PlaceItem> generateFakePlace() {
-        return new ArrayList<>(FAKE_PLACE);
+    static List<PlaceItem> generatePlace() {
+        return new ArrayList<>(PLACE);
     }
 
-    private static List<String> FAKE_PLACENAME = Arrays.asList(
+    private static List<String> PLACENAME = Arrays.asList(
             "Salle 1", "Salle 2", "Salle 3", "Salle 4", "Salle 5", "Salle 6", "Salle 7", "Salle 8", "Salle 9", "Salle 10"
     );
 
-    static List<String> generateFakePlaceNames() {
-        return new ArrayList<>(FAKE_PLACENAME);
+    static List<String> generatePlaceNames() {
+        return new ArrayList<>(PLACENAME);
     }
 }

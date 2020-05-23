@@ -27,14 +27,17 @@ import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.fragment.DatePickerFragment;
 import com.lamzone.mareunion.controler.fragment.TimePickeFragment;
 import com.lamzone.mareunion.di.DI;
-import com.lamzone.mareunion.fakeServices.ApiMeeting;
-import com.lamzone.mareunion.fakeServices.ApiPlace;
-import com.lamzone.mareunion.model.Meeting;
-import com.lamzone.mareunion.model.PlaceItem;
+import com.lamzone.mareunion.model.services.ApiMeeting;
+import com.lamzone.mareunion.model.services.ApiPlace;
+import com.lamzone.mareunion.model.items.Meeting;
+import com.lamzone.mareunion.model.items.PlaceItem;
+import com.lamzone.mareunion.utils.DateUtils;
+import com.lamzone.mareunion.utils.FilterUtils;
 import com.lamzone.mareunion.view.recycler.MailListRecyclerViewAdapter;
 import com.lamzone.mareunion.view.recycler.PlaceAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -44,7 +47,9 @@ import butterknife.ButterKnife;
 public class AddNewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, MailListRecyclerViewAdapter.MailsToDelete {
 
     private ApiMeeting mApiMeeting;
+   // private List<Meeting> mMeetings = new ArrayList<>();
     private ApiPlace mApiPlace;
+   // private int dispoTime;
 
     @BindView(R.id.createNewMeeting)
     Button saveButton;
@@ -89,8 +94,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         ButterKnife.bind(this);
         configureRecyclerView();
         onAddMailButtonClick();
-        mApiMeeting = DI.getFakeMeetingApi();
-        mApiPlace = DI.getApiFakePlace();
+        mApiMeeting = DI.getMeetingApi();
+        mApiPlace = DI.getApiPlace();
         addDateToMeeting();
         addTimeToMeeting();
         saveNewMeeting();
@@ -101,14 +106,15 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        timeDialogBox.setText(mApiMeeting.timePickerSet(hourOfDay, minute));
-        mMeetingHour = mApiMeeting.timePickerSet(hourOfDay, minute);
+        timeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+        mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+        //dispoTime = hourOfDay;
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        enterDate.setText(mApiMeeting.datePickerSet(year, month, dayOfMonth));
-        mMeetingDate = mApiMeeting.datePickerSet(year, month, dayOfMonth);
+        enterDate.setText(DateUtils.datePickerSet(year, month, dayOfMonth));
+        mMeetingDate = DateUtils.datePickerSet(year, month, dayOfMonth);
     }
 
     public void addNewMeeting() {
@@ -124,22 +130,16 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     }
 
     public void addDateToMeeting() {
-        enterDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment datePicker = new DatePickerFragment();
-                datePicker.show(getSupportFragmentManager(), "datePicker");
-            }
+        enterDate.setOnClickListener(v -> {
+            DialogFragment datePicker = new DatePickerFragment();
+            datePicker.show(getSupportFragmentManager(), "datePicker");
         });
     }
 
     private void addTimeToMeeting() {
-        timeDialogBox.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DialogFragment timePicker = new TimePickeFragment();
-                timePicker.show(getSupportFragmentManager(), "timePicker");
-            }
+        timeDialogBox.setOnClickListener(v -> {
+            DialogFragment timePicker = new TimePickeFragment();
+            timePicker.show(getSupportFragmentManager(), "timePicker");
         });
     }
 
@@ -179,24 +179,21 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     }
 
     private void onAddMailButtonClick() {
-        mAddMailsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String mail = mEnterParticipantMail.getText() + "";
-
-                if ("".equals(mParticipants)) {
-                    mParticipants = String.valueOf(mEnterParticipantMail.getText());
+        mAddMailsButton.setOnClickListener(view -> {
+            String mail = mEnterParticipantMail.getText() + "";
+            if ("".equals(mParticipants)) {
+                if (!mail.matches(".+@.+\\.[a-z]+")) {
+                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
                 } else {
-                    mParticipants = mParticipants + ", " + mEnterParticipantMail.getText();
+                    mParticipants = mail;
+                    addMailToMailsList();
                 }
 
-                if ("".equals(mParticipants) || !mParticipants.matches(".+@.+\\.[a-z]+")) {
-                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir les informations concernant le/les participants correctement avant de sauvegarder leurs informations.", Toast.LENGTH_SHORT).show();
-                } else {
-                    mMailsList.add(mail);
-                    initListMails(mMailsList);
-                    mEnterParticipantMail.setText("");
-                }
+            } else if (mail.matches(".+@.+\\.[a-z]+")) {
+                mParticipants = mParticipants + ", " + mail;
+                addMailToMailsList();
+            } else {
+                Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -207,15 +204,22 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     }
 
     private void saveNewMeeting() {
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mObjectOfMeeting = String.valueOf(meetingObject.getText());
-                if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
-                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
-                } else {
-                    addNewMeeting();
-                }
+        saveButton.setOnClickListener(v -> {
+            mObjectOfMeeting = String.valueOf(meetingObject.getText());
+            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
+                Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
+            } else {
+
+                /**
+                 * try to compare date to date + 1 to show disponibility
+                 */
+//                Date hour = new Date(3600*1000);
+//                String dispoHour = String.valueOf(dispoTime + hour.getTime());
+                //doit chercher dans la liste de meeting
+                //necessité de rajouter un champ datedisponiblemax dans meeting de valeur hourofday+1heure, minute
+                // afin de comparer cette valeur a dispohour
+
+                addNewMeeting();
             }
         });
     }
@@ -234,6 +238,13 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         AddNewMeetingActivity.this.finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    private void addMailToMailsList() {
+        String mail = mEnterParticipantMail.getText() + "";
+        mMailsList.add(mail);
+        initListMails(mMailsList);
+        mEnterParticipantMail.setText("");
     }
 }
 

@@ -1,4 +1,4 @@
-package com.lamzone.mareunion.model;
+package com.lamzone.mareunion.model.items;
 
 public class Meeting {
 

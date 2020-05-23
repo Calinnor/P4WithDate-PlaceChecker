@@ -1,6 +1,6 @@
 package com.lamzone.mareunion.view.event;
 
-import com.lamzone.mareunion.model.Meeting;
+import com.lamzone.mareunion.model.items.Meeting;
 
 /**
  * delete event

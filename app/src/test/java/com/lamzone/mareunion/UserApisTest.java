@@ -1,10 +1,10 @@
 package com.lamzone.mareunion;
 
 import com.lamzone.mareunion.di.DI;
-import com.lamzone.mareunion.fakeServices.ApiMeeting;
-import com.lamzone.mareunion.fakeServices.ApiPlace;
-import com.lamzone.mareunion.model.Meeting;
-import com.lamzone.mareunion.model.PlaceItem;
+import com.lamzone.mareunion.model.services.ApiMeeting;
+import com.lamzone.mareunion.model.services.ApiPlace;
+import com.lamzone.mareunion.model.items.Meeting;
+import com.lamzone.mareunion.model.items.PlaceItem;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -34,12 +34,12 @@ public class UserApisTest {
 
     @Before
     public void setupPlace() {
-        mApiPlace = DI.getNewInstanceFakePlaceApi();
+        mApiPlace = DI.getNewInstancePlaceApi();
     }
 
     @Before
     public void setupMeeting() {
-        mApiMeeting = DI.getNewInstanceFakeApi();
+        mApiMeeting = DI.getNewInstanceApi();
     }
 
     /**
@@ -179,20 +179,20 @@ public class UserApisTest {
      */
     @Test
     public void getFakePlaceNameWithSucces() {
-        String exceptedPlaceName = mApiPlace.getFakePlaceNames().get(0);
+        String exceptedPlaceName = mApiPlace.getPlaceNames().get(0);
         assertNotNull(exceptedPlaceName);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void getFakePlaceNameOutOfList() {
-        String exceptedPlaceName = mApiPlace.getFakePlaceNames().get(mApiPlace.getFakePlaceNames().size() + 1);
-        assertTrue(mApiPlace.getFakePlaceNames().contains(exceptedPlaceName));
+        String exceptedPlaceName = mApiPlace.getPlaceNames().get(mApiPlace.getPlaceNames().size() + 1);
+        assertTrue(mApiPlace.getPlaceNames().contains(exceptedPlaceName));
     }
 
     @Test
     public void getFakePlaceNameWithSuccessSamePlaceItem() {
-        String exceptedPlaceName = mApiPlace.getFakePlaceNames().get(3);
-        assertEquals(mApiPlace.getFakePlaceNames().get(3), exceptedPlaceName);
+        String exceptedPlaceName = mApiPlace.getPlaceNames().get(3);
+        assertEquals(mApiPlace.getPlaceNames().get(3), exceptedPlaceName);
     }
 
     /**

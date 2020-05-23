@@ -49,6 +49,8 @@ public class MainMeetingActivityTest {
         assertThat(mMainMeetingActivity, notNullValue());
     }
 
+    //after pour reinitialiser apres chaque test
+
     @Test
     public void meetingList_is_empty() {
         onView(withId(R.id.list_meetings_for_recyclerView))

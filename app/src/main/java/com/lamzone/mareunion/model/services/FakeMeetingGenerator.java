@@ -1,7 +1,7 @@
-package com.lamzone.mareunion.fakeServices;
+package com.lamzone.mareunion.model.services;
 
 import com.lamzone.mareunion.R;
-import com.lamzone.mareunion.model.Meeting;
+import com.lamzone.mareunion.model.items.Meeting;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.lamzone.mareunion.R;
-import com.lamzone.mareunion.model.PlaceItem;
+import com.lamzone.mareunion.model.items.PlaceItem;
 
 import java.util.ArrayList;
 

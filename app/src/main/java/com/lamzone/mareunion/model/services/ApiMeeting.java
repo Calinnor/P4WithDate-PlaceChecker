@@ -1,6 +1,6 @@
-package com.lamzone.mareunion.fakeServices;
+package com.lamzone.mareunion.model.services;
 
-import com.lamzone.mareunion.model.Meeting;
+import com.lamzone.mareunion.model.items.Meeting;
 
 import java.util.List;
 
@@ -19,10 +19,6 @@ public interface ApiMeeting {
     List<Meeting> filterDate(String date);
 
     List<Meeting> filterPlaceName(String placeItem);
-
-    String timePickerSet (int hourOfDay, int minute);
-
-    String datePickerSet (int year, int month, int dayOfMonth);
 
 }
 
