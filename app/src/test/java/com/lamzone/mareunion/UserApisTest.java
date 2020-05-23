@@ -218,7 +218,6 @@ public class UserApisTest {
         assertTrue(mApiMeeting.getMeeting().size() == 2);
         mMeetingDateFiltered = mApiMeeting.filterDate("17/05/21");
         assertTrue(mMeetingDateFiltered.contains(meetingToAdd));
-        assertFalse(mMeetingDateFiltered.contains(secondMeetingToAdd));
     }
 
     @Test
@@ -241,35 +240,6 @@ public class UserApisTest {
         assertTrue(mApiMeeting.getMeeting().size() == 2);
         mMeetingPlaceFiltered = mApiMeeting.filterPlaceName("Salle2");
         assertTrue(mMeetingPlaceFiltered.contains(secondMeetingToAdd));
-        assertFalse(mMeetingPlaceFiltered.contains(meetingToAdd));
     }
-
-    /**
-     * display date and time modification tests
-     */
-    @Test
-    public void timePickerSetModifyTimeWithSucces() {
-        timeDialogBox = mApiMeeting.timePickerSet(5, 8);
-        assertTrue(timeDialogBox.contains("05H08"));
-        timeDialogBox = mApiMeeting.timePickerSet(15, 8);
-        assertTrue(timeDialogBox.contains("15H08"));
-        timeDialogBox = mApiMeeting.timePickerSet(5, 18);
-        assertTrue(timeDialogBox.contains("05H18"));
-        timeDialogBox = mApiMeeting.timePickerSet(15, 18);
-        assertTrue(timeDialogBox.contains("15H18"));
-    }
-
-    @Test
-    public void datePickerSetModifyDateWithSucces() {
-        enterDate = mApiMeeting.datePickerSet(20, 5, 6);
-        assertTrue(enterDate.contains("06/05/20"));
-        enterDate = mApiMeeting.datePickerSet(20, 6, 15);
-        assertTrue(enterDate.contains("15/06/20"));
-        enterDate = mApiMeeting.datePickerSet(20, 10, 15);
-        assertTrue(enterDate.contains("15/10/20"));
-        enterDate = mApiMeeting.datePickerSet(20, 10, 5);
-        assertTrue(enterDate.contains("05/10/20"));
-    }
-
 
 }

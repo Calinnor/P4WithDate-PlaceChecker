@@ -20,16 +20,5 @@ public class FilterUtils {
         return mMeetingFiltered;
     }
 
-//    public static List<Meeting> filteringTimeOptions(int hourOfDay, int minute){
-//        ApiMeeting mApiMeeting = DI.getMeetingApi();
-//        List<Meeting> mMeetings = new ArrayList<>();
-//        List<Meeting> mMeetingFiltered = mApiMeeting.getMeeting();
-//        for (Meeting meeting : mMeetings) {
-//            if (meeting.getMeetingDate().equals(DateUtils.timePickerSet(hourOfDay, minute)))
-//                mMeetingFiltered.add(meeting);
-//        }
-//        return mMeetingFiltered;
-//    }
-
 
 }

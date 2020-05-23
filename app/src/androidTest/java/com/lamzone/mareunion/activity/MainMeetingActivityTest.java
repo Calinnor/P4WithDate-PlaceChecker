@@ -49,7 +49,7 @@ public class MainMeetingActivityTest {
         assertThat(mMainMeetingActivity, notNullValue());
     }
 
-    //after pour reinitialiser apres chaque test
+    //TODO @after pour reinitialiser apres chaque test a trouver comment ca fonctionne afin de ne pas avoir a utiliser delete
 
     @Test
     public void meetingList_is_empty() {
@@ -99,7 +99,6 @@ public class MainMeetingActivityTest {
         onView(withId(R.id.list_meetings_for_recyclerView)).check(matches(isDisplayed()));
 
         onView(withId(R.id.filter_button)).perform(click());
-        onView(withId(R.id.filter_button)).perform(click());
 
         onView(ViewMatchers.withText("Toutes les réunions")).check(matches(isDisplayed()));
         onView(ViewMatchers.withText("Toutes les réunions")).perform(click());
@@ -137,7 +136,6 @@ public class MainMeetingActivityTest {
         onView(withId(R.id.createNewMeeting)).perform(click());
         onView(withId(R.id.list_meetings_for_recyclerView)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.filter_button)).perform(click());
         onView(withId(R.id.filter_button)).perform(click());
 
         onView(ViewMatchers.withText("Filtrer les réunions par date")).check(matches(isDisplayed()));
@@ -183,7 +181,6 @@ public class MainMeetingActivityTest {
         onView(withId(R.id.createNewMeeting)).perform(click());
         onView(withId(R.id.list_meetings_for_recyclerView)).check(matches(isDisplayed()));
 
-        onView(withId(R.id.filter_button)).perform(click());
         onView(withId(R.id.filter_button)).perform(click());
 
         onView(ViewMatchers.withText("Filtrer les réunions par lieu")).check(matches(isDisplayed()));
