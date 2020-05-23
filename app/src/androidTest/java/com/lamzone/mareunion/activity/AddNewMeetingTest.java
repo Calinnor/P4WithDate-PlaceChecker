@@ -3,13 +3,13 @@ package com.lamzone.mareunion.activity;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import androidx.test.espresso.contrib.PickerActions;
+import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.rule.ActivityTestRule;
 
 import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.activity.AddNewMeetingActivity;
 import com.lamzone.mareunion.controler.activity.MainMeetingActivity;
-import com.lamzone.mareunion.di.DI;
-import com.lamzone.mareunion.fakeServices.ApiMeeting;
 import com.lamzone.mareunion.utils.DeleteViewAction;
 
 import org.junit.Before;
@@ -17,6 +17,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 import static com.lamzone.mareunion.utils.RecyclerViewItemCountAssertion.withItemCount;
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
@@ -57,6 +58,29 @@ public class AddNewMeetingTest {
     @Test
     public void useDeleteMeeting_DisplayMeetingList_MinusOne() {
 
+        onView(withId(R.id.meeting_object)).perform(replaceText("Test"));
+
+        onView(withId(R.id.spinner_place)).perform(click());
+        onData(anything()).atPosition(0).perform(click());
+
+        onView(withId(R.id.time_start_dialogbox)).perform(click());
+        onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.enterDate)).perform(click());
+        onView(isAssignableFrom(DatePicker.class)).perform(setDate(1980, 10, 30));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail@test.mail"));
+        onView(withId(R.id.add_mails_button)).perform(scrollTo(), click());
+
+        onView(withId(R.id.createNewMeeting)).perform(click());
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(1));
+
+        onView(withId(R.id.list_meetings_for_recyclerView)).perform(actionOnItemAtPosition(0, new DeleteViewAction()));
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(0));
     }
 
 
@@ -64,7 +88,7 @@ public class AddNewMeetingTest {
     public void addMailButton_addMail() {
         onView(withId(R.id.add_meeting_mails_list_recyclerview)).check(withItemCount(0));
         onView(withId(R.id.layout_participants_mails)).perform(scrollTo(), click());
-        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail"));
+        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail@test.test"));
         onView(withId(R.id.add_mails_button)).perform(scrollTo(), click());
         onView(withId(R.id.add_meeting_mails_list_recyclerview)).perform(scrollTo(), click());
         onView(withId(R.id.add_meeting_mails_list_recyclerview)).check(withItemCount(1));
@@ -102,7 +126,7 @@ public class AddNewMeetingTest {
     }
 
     @Test
-    public void saveButton_display_mainMeetingActivity_onceAllInformations_get(){
+    public void saveButton_display_mainMeetingActivity_andAddMeeting_onceAllInformations_get(){
 
         onView(withId(R.id.meeting_object)).perform(replaceText("Test"));
 
@@ -117,13 +141,12 @@ public class AddNewMeetingTest {
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(1980, 10, 30));
         onView(withId(android.R.id.button1)).perform(click());
 
-        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail"));
+        onView(withId(R.id.enter_participant_mail)).perform(replaceText("TestMail@test.mail"));
         onView(withId(R.id.add_mails_button)).perform(scrollTo(), click());
 
         onView(withId(R.id.createNewMeeting)).perform(click());
-        onView(withId(R.id.add_meeting)).check(matches(isDisplayed()));
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(matches(isDisplayed()));
+
+        onView(withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(1));
     }
-
-
-
 }
