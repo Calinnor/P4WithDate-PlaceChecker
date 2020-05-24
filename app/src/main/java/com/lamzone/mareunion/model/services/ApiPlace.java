@@ -4,12 +4,6 @@ import com.lamzone.mareunion.model.items.PlaceItem;
 
 import java.util.List;
 
-/**
- * adding fakeplaceapiservice to
- * 1/reduce code in app
- * 2/to ease reading and maintain code
- */
-
 public interface ApiPlace {
 
     List<PlaceItem> getPlaceItem();

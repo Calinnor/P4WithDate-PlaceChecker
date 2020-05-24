@@ -32,12 +32,10 @@ import com.lamzone.mareunion.model.services.ApiPlace;
 import com.lamzone.mareunion.model.items.Meeting;
 import com.lamzone.mareunion.model.items.PlaceItem;
 import com.lamzone.mareunion.utils.DateUtils;
-import com.lamzone.mareunion.utils.FilterUtils;
 import com.lamzone.mareunion.view.recycler.MailListRecyclerViewAdapter;
 import com.lamzone.mareunion.view.recycler.PlaceAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,9 +45,7 @@ import butterknife.ButterKnife;
 public class AddNewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, MailListRecyclerViewAdapter.MailsToDelete {
 
     private ApiMeeting mApiMeeting;
-   // private List<Meeting> mMeetings = new ArrayList<>();
     private ApiPlace mApiPlace;
-   // private int dispoTime;
 
     @BindView(R.id.createNewMeeting)
     Button saveButton;
@@ -108,7 +104,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         timeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
         mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
-        //dispoTime = hourOfDay;
     }
 
     @Override
@@ -209,16 +204,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
             } else {
-
-                /**
-                 * try to compare date to date + 1 to show disponibility
-                 */
-//                Date hour = new Date(3600*1000);
-//                String dispoHour = String.valueOf(dispoTime + hour.getTime());
-                //doit chercher dans la liste de meeting
-                //necessité de rajouter un champ datedisponiblemax dans meeting de valeur hourofday+1heure, minute
-                // afin de comparer cette valeur a dispohour
-
                 addNewMeeting();
             }
         });

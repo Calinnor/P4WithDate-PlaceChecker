@@ -41,7 +41,7 @@ public class PlaceAdapter extends ArrayAdapter<PlaceItem> {
         ImageView placeColorTag = convertView.findViewById(R.id.place_color_tag);
         TextView placeName = convertView.findViewById(R.id.place_name);
         PlaceItem currentItem = getItem(position);
-        if (currentItem != null) { //execption if current item !=null
+        if (currentItem != null) {
             placeColorTag.setImageResource(currentItem.getmPlaceColorTag());
             placeName.setText(currentItem.getmPlaceName());
         }

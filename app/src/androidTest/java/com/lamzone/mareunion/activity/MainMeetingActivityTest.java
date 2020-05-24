@@ -49,8 +49,6 @@ public class MainMeetingActivityTest {
         assertThat(mMainMeetingActivity, notNullValue());
     }
 
-    //TODO @after pour reinitialiser apres chaque test a trouver comment ca fonctionne afin de ne pas avoir a utiliser delete
-
     @Test
     public void meetingList_is_empty() {
         onView(withId(R.id.list_meetings_for_recyclerView))

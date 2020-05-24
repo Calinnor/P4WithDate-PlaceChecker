@@ -40,13 +40,6 @@ import butterknife.ButterKnife;
 
 public class MainMeetingActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-    /**
-     * recyclerview first step
-     * 1/ declare recyclerview
-     * 2/ declare api
-     * 3/ declare and initiate list of meeting else=crash
-     */
-
     ApiMeeting mApiMeeting;
     ApiPlace mApiPlace;
     private List<Meeting> mMeeting = new ArrayList<>();
@@ -72,14 +65,8 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         mApiPlace = DI.getApiPlace();
         this.configureToolbar();
         clickOnAddNewMeetingButton();
-        /**
-         * 4/ configure recycler in main
-         */
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(new MyMeetingAdapter(mMeeting));
-        /**
-         * 5/ once name class of recycler given create class (MyMeetingAdapter)
-         */
     }
 
     @Override
@@ -88,9 +75,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         initEmptyList();
     }
 
-    /**
-     * initiate then given life to list of meeting
-     */
     private void initList() {
         myMeetingAdapter = new MyMeetingAdapter(mApiMeeting.getMeeting());
         mRecyclerView.setAdapter(myMeetingAdapter);
@@ -109,9 +93,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         initList();
     }
 
-    /**
-     * toolbar with menu config
-     */
     private void configureToolbar() {
         setSupportActionBar(toolbar);
     }
@@ -138,30 +119,18 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * eventbus delete 3/ glue evnetbus with onStart activity
-     */
     @Override
     public void onStart() {
         super.onStart();
         EventBus.getDefault().register(this);
     }
 
-    /**
-     * eventbus 4/ glue eventbus with onStop activity
-     */
     @Override
     public void onStop() {
         super.onStop();
         EventBus.getDefault().unregister(this);
     }
 
-    /**
-     * eventbus 5/ suscribe to the event DeleteMeetingEvent (which is a class)
-     * need to declare interface
-     *
-     * @param event Fired if the user clicks on a delete button then init a new list
-     */
     @Subscribe
     public void onDeleteMeeting(DeleteMeetingEvent event) {
         mApiMeeting.deleteMeeting(event.mMeeting);
@@ -175,9 +144,6 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         });
     }
 
-    /**
-     * this dialog box is to high for me. I'll try to find something else...but it work
-     */
     private void dialogBoxForPlaceNameFiltering() {
         List<String> fakePlaceNames = new ArrayList<>(mApiPlace.getPlaceNames());
         String[] placeNamesToFiltered = new String[fakePlaceNames.size()];
@@ -208,6 +174,5 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
             mRecyclerView.setVisibility(View.VISIBLE);
         }
     }
-
 
 }

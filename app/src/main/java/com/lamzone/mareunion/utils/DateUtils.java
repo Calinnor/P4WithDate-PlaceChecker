@@ -4,7 +4,6 @@ public class DateUtils {
 
 
     public static String timePickerSet(int hourOfDay, int minute) {
-        //ajouter var en interne: methode static
         String timeDialogBox = "";
 
         if (minute < 10 && hourOfDay < 10) {

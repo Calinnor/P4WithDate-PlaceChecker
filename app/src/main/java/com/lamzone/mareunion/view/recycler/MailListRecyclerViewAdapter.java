@@ -72,7 +72,5 @@ public class MailListRecyclerViewAdapter extends RecyclerView.Adapter<MailListRe
         void updateMailList(String mail) {
             mMail.setText(mail);
         }
-
-
     }
 }

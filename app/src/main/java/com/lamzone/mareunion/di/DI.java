@@ -5,14 +5,8 @@ import com.lamzone.mareunion.model.services.ApiPlace;
 import com.lamzone.mareunion.model.services.MeetingService;
 import com.lamzone.mareunion.model.services.PlaceService;
 
-/**
- * create instance of FakeMeetingService using ApiService service
- */
 public class DI {
 
-    /**
-     * implemente FakeApi
-     */
     private static ApiMeeting mMeetingApi = new MeetingService();
     private static ApiPlace mApiPlace = new PlaceService();
 
