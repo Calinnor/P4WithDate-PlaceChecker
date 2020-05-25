@@ -8,13 +8,15 @@ public interface ApiMeeting {
 
     List<Meeting> getMeeting();
 
+    /**
+     * @param meeting dont forget to put param for methods !(
+     */
+
     void deleteMeeting(Meeting meeting);
 
     void addNewMeeting(Meeting meeting);
 
-    List<Meeting> filterDate(String date);
-
-    List<Meeting> filterPlaceName(String placeItem);
+    List<Meeting> filteringOptions(String filteredOption);
 
 }
 

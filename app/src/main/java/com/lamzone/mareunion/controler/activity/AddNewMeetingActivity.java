@@ -69,6 +69,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private int clickedColorPlaceTag;
     private ArrayList<PlaceItem> mPlaceItemsList;
     private String mMeetingPlace = "";
+    private int mMeetingDisponibility;
 
     private List<String> mMailsList = new ArrayList<>();
     @BindView(R.id.add_meeting_mails_list_recyclerview)
@@ -118,7 +119,9 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 "-" + timeDialogBox.getText().toString() + "-",
                 placeChoice.getText().toString(),
                 mParticipants,
-                enterDate.getText().toString()
+                enterDate.getText().toString()//,
+                // mMeetingDisponibility.getTime()
+
         );
         mApiMeeting.addNewMeeting(reunion);
         finish();
@@ -176,19 +179,15 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private void onAddMailButtonClick() {
         mAddMailsButton.setOnClickListener(view -> {
             String mail = mEnterParticipantMail.getText() + "";
-            if ("".equals(mParticipants)) {
-                if (!mail.matches(".+@.+\\.[a-z]+")) {
-                    Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
-                } else {
-                    mParticipants = mail;
-                    addMailToMailsList();
-                }
 
-            } else if (mail.matches(".+@.+\\.[a-z]+")) {
-                mParticipants = mParticipants + ", " + mail;
+            if (!mail.matches(".+@.+\\.[a-z]+")) {
+                Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
+            } else if ("".equals(mParticipants)) {
+                mParticipants = mail;
                 addMailToMailsList();
             } else {
-                Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
+                mParticipants = mParticipants + ", " + mail;
+                addMailToMailsList();
             }
         });
     }
@@ -204,6 +203,16 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
             } else {
+
+                /**
+                 * try to compare date to date + 1 to show disponibility
+                 */
+//                Date hour = new Date(3600*1000);
+//                String dispoHour = String.valueOf(dispoTime + hour.getTime());
+                //doit chercher dans la liste de meeting
+                //necessité de rajouter un champ datedisponiblemax dans meeting de valeur hourofday+1heure, minute
+                // afin de comparer cette valeur a dispohour
+
                 addNewMeeting();
             }
         });

@@ -12,6 +12,7 @@ import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.activity.MainMeetingActivity;
 import com.lamzone.mareunion.utils.DeleteViewAction;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -48,6 +49,8 @@ public class MainMeetingActivityTest {
         MainMeetingActivity mMainMeetingActivity = mActivityRule.getActivity();
         assertThat(mMainMeetingActivity, notNullValue());
     }
+
+    //TODO @after pour reinitialiser apres chaque test a trouver comment ca fonctionne afin de ne pas avoir a utiliser delete
 
     @Test
     public void meetingList_is_empty() {
