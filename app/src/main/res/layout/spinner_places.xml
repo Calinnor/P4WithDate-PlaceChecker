@@ -10,7 +10,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:background="@color/cardview_dark_background" />
+        android:background="@color/cardview_dark_background"
+        android:contentDescription="@string/colorforplace" />
 
     <TextView
         android:id="@+id/place_name"
@@ -21,7 +22,7 @@
         android:layout_margin="4dp"
         android:layout_toEndOf="@+id/place_color_tag"
         android:gravity="center"
-        android:text="place_name"
+        android:text="@string/place_name"
         android:textSize="18sp" />
 <!-- after add the layout of spinner view add a class for the object view in spinner (placeitem)-->
 </RelativeLayout>

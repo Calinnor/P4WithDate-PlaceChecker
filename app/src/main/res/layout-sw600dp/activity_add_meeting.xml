@@ -31,7 +31,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:hint="Donnez l'objet de la réunion ici:">
+                    android:hint="@string/donnez_l_objet_de_la_reunion_ici">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/meeting_object"
@@ -54,7 +54,7 @@
                     android:background="#F7F5F8"
                     android:gravity="center"
                     android:paddingBottom="8dp"
-                    android:text="Selectionnez votre salle de réunion:"
+                    android:text="@string/selectionnez_votre_salle_de_r_union"
                     android:textColor="#322D39"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -105,7 +105,7 @@
                         android:layout_weight="50"
                         android:background="#F7F5F8"
                         android:gravity="center"
-                        android:hint="Date de la reunion"
+                        android:hint="@string/date_de_la_reunion"
                         android:padding="4dp"
                         android:textColor="#322D39"
                         android:textSize="24sp"
@@ -119,7 +119,7 @@
                         android:layout_weight="50"
                         android:background="#F7F5F8"
                         android:gravity="center"
-                        android:hint="Heure de debut"
+                        android:hint="@string/heure_de_debut"
                         android:padding="4dp"
                         android:textColor="#322D39"
                         android:textSize="24sp"
@@ -148,7 +148,7 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="96"
-                            android:hint="Courriel du participant">
+                            android:hint="@string/courriel_du_participant">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/enter_participant_mail"
@@ -180,7 +180,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Sauvegardez la réunion"
+                    android:text="@string/sauvegardez_la_r_union"
                     android:textColor="#322D39"
                     android:textStyle="bold" />
             </LinearLayout>

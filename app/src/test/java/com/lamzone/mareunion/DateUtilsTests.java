@@ -7,12 +7,9 @@ import static org.junit.Assert.assertTrue;
 
 public class DateUtilsTests {
 
-    private String timeDialogBox = "";
-    private String enterDate = "";
-
     @Test
     public void timePickerSetModifyTimeDisplayWithSucces() {
-        timeDialogBox = DateUtils.timePickerSet(5, 8);
+        String timeDialogBox = DateUtils.timePickerSet(5, 8);
         assertTrue(timeDialogBox.contains("05H08"));
         timeDialogBox = DateUtils.timePickerSet(15, 8);
         assertTrue(timeDialogBox.contains("15H08"));
@@ -24,7 +21,7 @@ public class DateUtilsTests {
 
     @Test
     public void datePickerSetModifyDateDisplayWithSucces() {
-        enterDate = DateUtils.datePickerSet(20, 5, 6);
+        String enterDate = DateUtils.datePickerSet(20, 5, 6);
         assertTrue(enterDate.contains("06/05/20"));
         enterDate = DateUtils.datePickerSet(20, 6, 15);
         assertTrue(enterDate.contains("15/06/20"));

@@ -12,7 +12,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -86,7 +89,7 @@ public class MeetingServicesTest {
         int baseSize = mApiMeeting.getMeeting().size();
         assertFalse(mApiMeeting.getMeeting().contains(meetingToAdd));
         mApiMeeting.addNewMeeting(meeting);
-        assertTrue(mApiMeeting.getMeeting().size() == baseSize + 1);
+        assertEquals(mApiMeeting.getMeeting().size(), baseSize + 1);
         assertTrue(mApiMeeting.getMeeting().contains(meeting));
     }
 
@@ -94,7 +97,7 @@ public class MeetingServicesTest {
     public void deleteMeetingWithSuccessFromList() {
         int sizeToFind = mApiMeeting.getMeeting().size() - 1;
         mApiMeeting.deleteMeeting(mApiMeeting.getMeeting().get(0));
-        assertTrue(mApiMeeting.getMeeting().size() == sizeToFind);
+        assertEquals(mApiMeeting.getMeeting().size(), sizeToFind);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -107,7 +110,7 @@ public class MeetingServicesTest {
     public void deletedMeetingIsMeetingToDelete() {
         Meeting meetingToDelete = mApiMeeting.getMeeting().get(0);
         mApiMeeting.deleteMeeting(meetingToDelete);
-        assertFalse(mApiMeeting.getMeeting().get(0).equals(meetingToDelete));
+        assertNotEquals(mApiMeeting.getMeeting().get(0), meetingToDelete);
         assertFalse(mApiMeeting.getMeeting().contains(meetingToDelete));
     }
 
@@ -128,7 +131,7 @@ public class MeetingServicesTest {
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting exceptedMeeting = mApiMeeting.getMeeting().get(2);
         assertNotNull(exceptedMeeting);
-        assertTrue(meetingToAdd.equals(exceptedMeeting));
+        assertEquals(meetingToAdd, exceptedMeeting);
         assertTrue(mApiMeeting.getMeeting().get(0).getMeetingDate().contains("17/05/21"));
         assertFalse(mApiMeeting.getMeeting().get(2).getMeetingDate().contains("17/05/21"));
         assertTrue(mApiMeeting.getMeeting().get(0).getMeetingHour().contains("- 8h30 -"));
@@ -153,14 +156,14 @@ public class MeetingServicesTest {
 
     @Test
     public void filterDateWithSucces() {
-        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        assertEquals(2, mApiMeeting.getMeeting().size());
         mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/21");
         assertTrue(mMeetingDateFiltered.contains(mApiMeeting.getMeeting().get(0)));
     }
 
     @Test
     public void filterDateWithNoSucces() {
-        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        assertEquals(2, mApiMeeting.getMeeting().size());
         mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/22");
         assertFalse(mMeetingDateFiltered.contains(mApiMeeting.getMeeting().get(0)));
         assertFalse(mMeetingDateFiltered.contains(mApiMeeting.getMeeting().get(1)));
@@ -168,14 +171,14 @@ public class MeetingServicesTest {
 
     @Test
     public void filterPlaceNameWithSucces() {
-        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        assertEquals(2, mApiMeeting.getMeeting().size());
         mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 2");
         assertTrue(mMeetingPlaceFiltered.contains(mApiMeeting.getMeeting().get(1)));
     }
 
     @Test
     public void filterPlaceNameWithNoSucces() {
-        assertTrue(mApiMeeting.getMeeting().size() == 2);
+        assertEquals(2, mApiMeeting.getMeeting().size());
         mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 3");
         assertFalse(mMeetingPlaceFiltered.contains(mApiMeeting.getMeeting().get(1)));
         assertFalse(mMeetingPlaceFiltered.contains(mApiMeeting.getMeeting().get(0)));

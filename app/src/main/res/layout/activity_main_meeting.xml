@@ -14,7 +14,7 @@
         android:background="@drawable/mareu"
         android:gravity="center"
         android:scaleType="fitCenter"
-        android:text="Votre liste de réunions est vide. Veuillez ajouter une réunion."
+        android:text="@string/votre_liste_de_r_unions_est_vide_veuillez_ajouter_une_r_union"
         android:textColor="#E30F2F"
         android:textSize="22sp"
         android:visibility="gone"

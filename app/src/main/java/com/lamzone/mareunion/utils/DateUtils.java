@@ -4,7 +4,7 @@ public class DateUtils {
 
 
     public static String timePickerSet(int hourOfDay, int minute) {
-        String timeDialogBox = "";
+        String timeDialogBox;
 
         if (minute < 10 && hourOfDay < 10) {
             timeDialogBox = "0" + hourOfDay + "H0" + minute;
@@ -22,7 +22,7 @@ public class DateUtils {
 
 
     public static String datePickerSet(int year, int month, int dayOfMonth) {
-        String enterDate = "";
+        String enterDate;
 
         if (month < 10 && dayOfMonth < 10) {
             enterDate = "0" + dayOfMonth + "/0" + month + "/" + year;

@@ -22,7 +22,8 @@
             android:layout_marginLeft="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            android:contentDescription="@string/colorforplace" />
 
     </LinearLayout>
 
@@ -56,7 +57,7 @@
                 android:layout_weight="33"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="Contains subject"
+                android:text="@string/contains_subject"
                 android:textColor="#0A0B0B"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -68,7 +69,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="Contains hour"
+                android:text="@string/contains_hour"
                 android:textColor="#0A0B0B"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -80,7 +81,7 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:padding="4dp"
-                android:text="Contains place"
+                android:text="@string/contains_place"
                 android:textColor="#0A0B0B"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -96,7 +97,7 @@
             android:maxLines="1"
             android:paddingLeft="5dp"
             android:paddingBottom="4dp"
-            android:text="Contains participants informations" />
+            android:text="@string/contains_participants_informations" />
 
     </LinearLayout>
 
@@ -114,7 +115,8 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            app:srcCompat="@drawable/ic_delete_anthracite_24dp" />
+            app:srcCompat="@drawable/ic_delete_anthracite_24dp"
+            android:contentDescription="@string/deletemeetingimage" />
 
     </LinearLayout>
 

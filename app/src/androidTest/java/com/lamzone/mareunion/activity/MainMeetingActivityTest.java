@@ -12,7 +12,6 @@ import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.activity.MainMeetingActivity;
 import com.lamzone.mareunion.utils.DeleteViewAction;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,7 +41,7 @@ public class MainMeetingActivityTest {
 
     @Rule
     public ActivityTestRule<MainMeetingActivity> mActivityRule =
-            new ActivityTestRule(MainMeetingActivity.class);
+            new ActivityTestRule<>(MainMeetingActivity.class);
 
     @Before
     public void setUp() {
@@ -112,7 +111,7 @@ public class MainMeetingActivityTest {
         onView(withId(R.id.filter_button)).perform(click());
         onView(withText("Filtrer les réunions par date")).check(matches(isDisplayed()));
         onView(ViewMatchers.withText("Filtrer les réunions par date")).perform(click());
-        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21, 06, 17));
+        onView(isAssignableFrom(DatePicker.class)).perform(PickerActions.setDate(21, 6, 17));
         onView(withId(android.R.id.button1)).perform(click());
         onView(ViewMatchers.withId(R.id.list_meetings_for_recyclerView)).check(withItemCount(0));
 

@@ -69,7 +69,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private int clickedColorPlaceTag;
     private ArrayList<PlaceItem> mPlaceItemsList;
     private String mMeetingPlace = "";
-    private int mMeetingDisponibility;
 
     private List<String> mMailsList = new ArrayList<>();
     @BindView(R.id.add_meeting_mails_list_recyclerview)
@@ -203,16 +202,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
             } else {
-
-                /**
-                 * try to compare date to date + 1 to show disponibility
-                 */
-//                Date hour = new Date(3600*1000);
-//                String dispoHour = String.valueOf(dispoTime + hour.getTime());
-                //doit chercher dans la liste de meeting
-                //necessité de rajouter un champ datedisponiblemax dans meeting de valeur hourofday+1heure, minute
-                // afin de comparer cette valeur a dispohour
-
                 addNewMeeting();
             }
         });

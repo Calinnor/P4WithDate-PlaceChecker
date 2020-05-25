@@ -39,16 +39,16 @@ public class AddNewMeetingTest {
 
     @Rule
     public ActivityTestRule<MainMeetingActivity> mActivityRule =
-            new ActivityTestRule(MainMeetingActivity.class);
+            new ActivityTestRule<>(MainMeetingActivity.class);
     @Rule
-    public ActivityTestRule mActivityNewMeetingRule =
-            new ActivityTestRule(AddNewMeetingActivity.class);
+    public ActivityTestRule<AddNewMeetingActivity> mActivityNewMeetingRule =
+            new ActivityTestRule<>(AddNewMeetingActivity.class);
 
     @Before
     public void setUp() {
         MainMeetingActivity mMainMeetingActivity = mActivityRule.getActivity();
         assertThat(mMainMeetingActivity, notNullValue());
-        AddNewMeetingActivity mAddNewMeetingActivity = (AddNewMeetingActivity) mActivityNewMeetingRule.getActivity();
+        AddNewMeetingActivity mAddNewMeetingActivity = mActivityNewMeetingRule.getActivity();
         assertThat(mAddNewMeetingActivity, notNullValue());
     }
 

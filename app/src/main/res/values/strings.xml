@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">Ma Réu</string>
+    <string name="selectionnez_votre_salle_de_r_union">Selectionnez votre salle de réunion:</string>
+    <string name="donnez_l_objet_de_la_r_union_ici">Donnez l\'objet de la réunion ici:</string>
+    <string name="heure_de_debut">Heure de debut</string>
+    <string name="courriel_du_participant">Courriel du participant</string>
+    <string name="date_de_la_reunion">Date de la reunion</string>
+    <string name="sauvegardez_la_r_union">Sauvegardez la réunion</string>
+    <string name="donnez_l_objet_de_la_reunion_ici">Donnez l\'objet de la réunion ici:</string>
+    <string name="donnez_l_objet_de_la_réunion_ici">Donnez l\'objet de la réunion ici:</string>
+    <string name="votre_liste_de_r_unions_est_vide_veuillez_ajouter_une_r_union">Votre liste de réunions est vide. Veuillez ajouter une réunion.</string>
+    <string name="entrez_l_e_mail_du_participant">Entrez l\'E-mail du participant</string>
+    <string name="deletemail">DeleteMail</string>
+    <string name="colorforplace">ColorForPlace</string>
+    <string name="deletemeetingimage">deleteMeetingImage</string>
+    <string name="contains_place">Contains place</string>
+    <string name="contains_subject">Contains subject</string>
+    <string name="contains_hour">Contains hour</string>
+    <string name="contains_participants_informations">Contains participants informations</string>
+    <string name="deletebuttonimage">DeleteButtonImage</string>
+    <string name="place_name">place_name</string>
 </resources>
