@@ -35,7 +35,10 @@ import com.lamzone.mareunion.utils.DateUtils;
 import com.lamzone.mareunion.view.recycler.MailListRecyclerViewAdapter;
 import com.lamzone.mareunion.view.recycler.PlaceAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -47,6 +50,11 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private ApiMeeting mApiMeeting;
     private ApiPlace mApiPlace;
 
+    private Date timeDateStart;
+    private Date timeDateEnd;
+
+    private int selectedTime;
+
     @BindView(R.id.createNewMeeting)
     Button saveButton;
 
@@ -55,8 +63,11 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private String mObjectOfMeeting = "";
 
     @BindView(R.id.time_start_dialogbox)
-    TextView timeDialogBox;
+    TextView startTimeDialogBox;
     private String mMeetingHour = "";
+
+    @BindView(R.id.time_end_dialogbox)
+    TextView endTimeDialogBox;
 
     @BindView(R.id.enterDate)
     TextView enterDate;
@@ -93,7 +104,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         mApiMeeting = DI.getMeetingApi();
         mApiPlace = DI.getApiPlace();
         addDateToMeeting();
-        addTimeToMeeting();
+        addEndTimeToMeeting();
+        addStartTimeToMeeting();
         saveNewMeeting();
         initPlacesList();
         addNewPlace();
@@ -102,20 +114,63 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        timeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
-        mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+        if (selectedTime == 0) {
+            startTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+            String startingHour = hourOfDay + ":" + minute;
+            try {
+                timeDateStart = new SimpleDateFormat("HH:mm").parse(startingHour);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            if (timeDateEnd == null) {
+                mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+            } else {
+                if (timeDateEnd.after(timeDateStart)) {
+                    mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+                } else {
+                    Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
+                    startTimeDialogBox.setText(null);
+                }
+            }
+        }else if (selectedTime == 1) {
+            String startingHour = hourOfDay + ":" + minute;
+            try {
+                timeDateEnd = new SimpleDateFormat("HH:mm").parse(startingHour);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if (timeDateStart != null) {
+                if (timeDateEnd.before(timeDateStart)) {
+                    Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
+                    endTimeDialogBox.setText(null);
+                } else {
+                    endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+                }
+            } else {
+                endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+            }
+        }
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        enterDate.setText(DateUtils.datePickerSet(year, month, dayOfMonth));
-        mMeetingDate = DateUtils.datePickerSet(year, month, dayOfMonth);
+        enterDate.setText(DateUtils.datePickerSet(year, month + 1, dayOfMonth));
+//        String datedispo = dayOfMonth+"/"+month+"/"+year;
+//        try {
+//            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datedispo);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//        Date hour = new Date(3600*1000);
+//        Date endDate = new Date(date1.getTime() + hour.getTime());
+        mMeetingDate = DateUtils.datePickerSet(year, month + 1, dayOfMonth);
     }
 
     public void addNewMeeting() {
         Meeting reunion = new Meeting(clickedColorPlaceTag,
                 mObjectOfMeeting,
-                "-" + timeDialogBox.getText().toString() + "-",
+                "-" + startTimeDialogBox.getText().toString() + "-",
                 placeChoice.getText().toString(),
                 mParticipants,
                 enterDate.getText().toString()//,
@@ -133,12 +188,23 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         });
     }
 
-    private void addTimeToMeeting() {
-        timeDialogBox.setOnClickListener(v -> {
-            DialogFragment timePicker = new TimePickeFragment();
-            timePicker.show(getSupportFragmentManager(), "timePicker");
+    private void addStartTimeToMeeting() {
+
+        startTimeDialogBox.setOnClickListener(v -> {
+            selectedTime = 0;
+            DialogFragment startTimePicker = new TimePickeFragment();
+            startTimePicker.show(getSupportFragmentManager(), "timePicker");
         });
     }
+
+    private void addEndTimeToMeeting() {
+        endTimeDialogBox.setOnClickListener(v -> {
+            selectedTime = 1;
+            DialogFragment endTimePicker = new TimePickeFragment();
+            endTimePicker.show(getSupportFragmentManager(), "timePicker2");
+        });
+    }
+
 
     private void initPlacesList() {
         mPlaceItemsList = new ArrayList<>(mApiPlace.getPlaceItem());

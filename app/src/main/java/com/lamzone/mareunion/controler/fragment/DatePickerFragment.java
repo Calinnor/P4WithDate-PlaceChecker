@@ -19,6 +19,7 @@ public class DatePickerFragment extends DialogFragment {
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
+
         /**
          * ligne under return a calendar since year 1900. It was my first implementation
          */
@@ -34,5 +35,6 @@ public class DatePickerFragment extends DialogFragment {
          */
         dialogDate.getDatePicker().setMinDate(System.currentTimeMillis());
         return dialogDate;
+
     }
 }
