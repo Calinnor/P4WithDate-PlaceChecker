@@ -142,7 +142,7 @@
                             android:layout_weight="50"
                             android:background="#F7F5F8"
                             android:gravity="center"
-                            android:hint="Heure_de_fin"
+                            android:hint="@string/heure_de_fin"
                             android:padding="2dp"
                             android:textColor="#322D39"
                             android:textSize="18sp"

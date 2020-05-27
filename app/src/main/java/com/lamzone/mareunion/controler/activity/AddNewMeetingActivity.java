@@ -133,22 +133,32 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                     startTimeDialogBox.setText(null);
                 }
             }
-        }else if (selectedTime == 1) {
-            String startingHour = hourOfDay + ":" + minute;
+        } else if (selectedTime == 1) {
+            String endingHour = hourOfDay + ":" + minute;
             try {
-                timeDateEnd = new SimpleDateFormat("HH:mm").parse(startingHour);
+                timeDateEnd = new SimpleDateFormat("HH:mm").parse(endingHour);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            if (timeDateStart != null) {
-                if (timeDateEnd.before(timeDateStart)) {
+//            if (timeDateStart != null) {
+//                if (timeDateEnd.before(timeDateStart)) {
+//                    Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
+//                    endTimeDialogBox.setText(null);
+//                } else {
+//                    endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+//                }
+//            } else {
+//                endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+//            }
+            if (timeDateStart == null) {
+                endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+            } else {
+                if (timeDateEnd.after(timeDateStart)) {
+                    endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+                } else {
                     Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                     endTimeDialogBox.setText(null);
-                } else {
-                    endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
                 }
-            } else {
-                endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
             }
         }
     }

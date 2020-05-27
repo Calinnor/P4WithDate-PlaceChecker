@@ -113,11 +113,17 @@
                         android:textColor="#322D39"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="50"
+                        android:orientation="vertical"
+                        android:weightSum="100">
 
                     <TextView
                         android:id="@+id/time_start_dialogbox"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
                         android:layout_margin="2dp"
                         android:layout_weight="50"
                         android:background="#F7F5F8"
@@ -127,6 +133,20 @@
                         android:textColor="#322D39"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/time_end_dialogbox"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_margin="2dp"
+                            android:layout_weight="50"
+                            android:background="#F7F5F8"
+                            android:gravity="center"
+                            android:hint="@string/heure_de_fin"
+                            android:padding="2dp"
+                            android:textColor="#322D39"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                 </LinearLayout>
 

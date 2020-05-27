@@ -19,4 +19,5 @@
     <string name="contains_participants_informations">Contains participants informations</string>
     <string name="deletebuttonimage">DeleteButtonImage</string>
     <string name="place_name">place_name</string>
+    <string name="heure_de_fin">Heure de fin</string>
 </resources>
