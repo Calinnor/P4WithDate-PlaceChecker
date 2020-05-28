@@ -64,6 +64,10 @@ public class AddNewMeetingTest {
         onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
         onView(withId(android.R.id.button1)).perform(click());
 
+        onView(withId(R.id.time_end_dialogbox)).perform(click());
+        onView(isAssignableFrom(TimePicker.class)).perform(setTime(12, 00));
+        onView(withId(android.R.id.button1)).perform(click());
+
         onView(withId(R.id.enterDate)).perform(click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(1980, 10, 30));
         onView(withId(android.R.id.button1)).perform(click());
@@ -112,7 +116,7 @@ public class AddNewMeetingTest {
         onView(withId(R.id.enterDate)).perform(click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(1980, 10, 30));
         onView(withId(android.R.id.button1)).perform(click());
-        onView(withId(R.id.enterDate)).check(matches(allOf(withText("30/09/1980"),
+        onView(withId(R.id.enterDate)).check(matches(allOf(withText("30/10/1980"),
                 isDisplayed())));
     }
 
@@ -132,6 +136,10 @@ public class AddNewMeetingTest {
 
         onView(withId(R.id.time_start_dialogbox)).perform(click());
         onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        onView(withId(R.id.time_end_dialogbox)).perform(click());
+        onView(isAssignableFrom(TimePicker.class)).perform(setTime(12, 00));
         onView(withId(android.R.id.button1)).perform(click());
 
         onView(withId(R.id.enterDate)).perform(click());
