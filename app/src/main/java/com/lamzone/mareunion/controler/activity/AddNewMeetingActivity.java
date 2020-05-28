@@ -52,6 +52,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     private Date timeDateStart;
     private Date timeDateEnd;
+    private long dateDisponibility;
+    private int browseMeeting;
 
     private int selectedTime;
 
@@ -64,10 +66,11 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
     @BindView(R.id.time_start_dialogbox)
     TextView startTimeDialogBox;
-    private String mMeetingHour = "";
+    private String mMeetingStartHour = "";
 
     @BindView(R.id.time_end_dialogbox)
     TextView endTimeDialogBox;
+    private String mMeetingEndHour = "";
 
     @BindView(R.id.enterDate)
     TextView enterDate;
@@ -124,10 +127,10 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             }
 
             if (timeDateEnd == null) {
-                mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+                mMeetingStartHour = DateUtils.timePickerSet(hourOfDay, minute);
             } else {
                 if (timeDateEnd.after(timeDateStart)) {
-                    mMeetingHour = DateUtils.timePickerSet(hourOfDay, minute);
+                    mMeetingStartHour = DateUtils.timePickerSet(hourOfDay, minute);
                 } else {
                     Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                     startTimeDialogBox.setText(null);
@@ -135,26 +138,20 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             }
         } else if (selectedTime == 1) {
             String endingHour = hourOfDay + ":" + minute;
+            endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
             try {
                 timeDateEnd = new SimpleDateFormat("HH:mm").parse(endingHour);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-//            if (timeDateStart != null) {
-//                if (timeDateEnd.before(timeDateStart)) {
-//                    Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
-//                    endTimeDialogBox.setText(null);
-//                } else {
-//                    endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
-//                }
-//            } else {
-//                endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
-//            }
+
             if (timeDateStart == null) {
                 endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+                mMeetingEndHour = String.valueOf(endTimeDialogBox);
             } else {
                 if (timeDateEnd.after(timeDateStart)) {
                     endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
+                    mMeetingEndHour = String.valueOf(endTimeDialogBox);
                 } else {
                     Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                     endTimeDialogBox.setText(null);
@@ -166,28 +163,20 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         enterDate.setText(DateUtils.datePickerSet(year, month + 1, dayOfMonth));
-//        String datedispo = dayOfMonth+"/"+month+"/"+year;
-//        try {
-//            date1 = new SimpleDateFormat("dd/MM/yyyy").parse(datedispo);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        Date hour = new Date(3600*1000);
-//        Date endDate = new Date(date1.getTime() + hour.getTime());
         mMeetingDate = DateUtils.datePickerSet(year, month + 1, dayOfMonth);
     }
 
     public void addNewMeeting() {
-        Meeting reunion = new Meeting(clickedColorPlaceTag,
+        Meeting meeting = new Meeting(clickedColorPlaceTag,
                 mObjectOfMeeting,
                 "-" + startTimeDialogBox.getText().toString() + "-",
+                endTimeDialogBox.getText().toString(),
                 placeChoice.getText().toString(),
                 mParticipants,
-                enterDate.getText().toString()//,
-                // mMeetingDisponibility.getTime()
-
+                enterDate.getText().toString(),
+                dateDisponibility = timeDateEnd.getTime()
         );
-        mApiMeeting.addNewMeeting(reunion);
+        mApiMeeting.addNewMeeting(meeting);
         finish();
     }
 
@@ -275,10 +264,33 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private void saveNewMeeting() {
         saveButton.setOnClickListener(v -> {
             mObjectOfMeeting = String.valueOf(meetingObject.getText());
-            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
+            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingStartHour) || "".equals(mMeetingEndHour)|| "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
             } else {
-                addNewMeeting();
+                dateDisponibility = timeDateStart.getTime();
+                List<Meeting> mMeetingDisponibility = new ArrayList<>();
+                List<Meeting> mMeetings = mApiMeeting.getMeeting();
+
+                if (mMeetings.size() == 0) {
+                    addNewMeeting();
+                } else {
+                    if (mMeetingDisponibility.size() < 1) {
+                        for (browseMeeting = 0; browseMeeting < mMeetings.size(); browseMeeting++) {
+                            if (mMeetings.get(browseMeeting).getMeetingPlaceName().equals(mMeetingPlace)
+                                    && mMeetings.get(browseMeeting).getMeetingDate().equals(mMeetingDate)
+                                    && dateDisponibility
+                                    <= mMeetings.get(browseMeeting).getMeetingDateDisponibility()) {
+                                mMeetingDisponibility.add(mMeetings.get(browseMeeting));
+                            }
+                        }
+                    }
+
+                    if (mMeetingDisponibility.size() == 0) {
+                        addNewMeeting();
+                    } else {
+                        Toast.makeText(AddNewMeetingActivity.this, "La salle que vous avez choisi ne sera pas disponible ce jour là avant " + mMeetings.get(browseMeeting - 1).getMeetingEndHour(), Toast.LENGTH_LONG).show();
+                    }
+                }
             }
         });
     }

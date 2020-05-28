@@ -43,15 +43,19 @@ public class MeetingServicesTest {
         Meeting meeting = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet ",
                 "- 8h30 -",
+                "10h00",
                 "Salle 1",
                 "Jack@Email - Joel@Email - Jess@Email",
-                "17/05/21");
+                "17/05/21",
+                178598654);
         Meeting meetingTwo = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet 2 ",
                 "- 9h30 -",
+                "12h00",
                 "Salle 2",
                 "Jacky@Email - Joe@Email - Jess@Email",
-                "17/06/21");
+                "17/06/21",
+                178598654);
         meetings.add(meeting);
         meetings.add(meetingTwo);
     }
@@ -82,9 +86,11 @@ public class MeetingServicesTest {
         Meeting meetingToAdd = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet ",
                 "- 8h30 -",
+                "12h00",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jess@Email",
-                "17/05/21");
+                "17/05/21",
+                178598654);
         Meeting meeting = mApiMeeting.getMeeting().get(0);
         int baseSize = mApiMeeting.getMeeting().size();
         assertFalse(mApiMeeting.getMeeting().contains(meetingToAdd));
@@ -125,17 +131,19 @@ public class MeetingServicesTest {
         Meeting meetingToAdd = new Meeting(R.drawable.bleu,
                 "Test réunion: Objet 3",
                 "- 10h30 -",
+                "12h00",
                 "Salle 1",
                 "Jack@Email - Joe@Email - Jessy@Email",
-                "18/05/21");
+                "18/05/21",
+                178598654);
         mApiMeeting.addNewMeeting(meetingToAdd);
         Meeting exceptedMeeting = mApiMeeting.getMeeting().get(2);
         assertNotNull(exceptedMeeting);
         assertEquals(meetingToAdd, exceptedMeeting);
         assertTrue(mApiMeeting.getMeeting().get(0).getMeetingDate().contains("17/05/21"));
         assertFalse(mApiMeeting.getMeeting().get(2).getMeetingDate().contains("17/05/21"));
-        assertTrue(mApiMeeting.getMeeting().get(0).getMeetingHour().contains("- 8h30 -"));
-        assertFalse(mApiMeeting.getMeeting().get(2).getMeetingHour().contains("- 8h30 -"));
+        assertTrue(mApiMeeting.getMeeting().get(0).getMeetingStartHour().contains("- 8h30 -"));
+        assertFalse(mApiMeeting.getMeeting().get(2).getMeetingStartHour().contains("- 8h30 -"));
         assertTrue(mApiMeeting.getMeeting().get(1).getMeetingParticipantsInformations().contains("Jacky@Email - Joe@Email - Jess@Email"));
         assertFalse(mApiMeeting.getMeeting().get(1).getMeetingParticipantsInformations().contains("Jack@Email - Joe@Email - Jessy@Email"));
         assertTrue(mApiMeeting.getMeeting().get(1).getMeetingSubject().contains("Test réunion: Objet 2 "));

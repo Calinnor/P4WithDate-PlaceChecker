@@ -68,7 +68,7 @@ public class MyMeetingAdapter extends RecyclerView.Adapter<MyMeetingAdapter.Meet
                 .apply(RequestOptions.circleCropTransform())
                 .into(meetingHolder.mMeetingColorTag);
         meetingHolder.mMeetingSubject.setText(currentItem.getMeetingSubject());
-        meetingHolder.mMeetingHour.setText(currentItem.getMeetingHour());
+        meetingHolder.mMeetingHour.setText(currentItem.getMeetingStartHour());
         meetingHolder.mMeetingPlaceName.setText(currentItem.getMeetingPlaceName());
         meetingHolder.mMeetingParticipantsInformations.setText(currentItem.getMeetingParticipantsInformations());
 

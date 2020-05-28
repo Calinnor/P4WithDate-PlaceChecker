@@ -195,7 +195,7 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        mDateToFilter = DateUtils.datePickerSet(year, month, dayOfMonth);
+        mDateToFilter = DateUtils.datePickerSet(year, month+1, dayOfMonth);
         mRecyclerView.setAdapter(new MyMeetingAdapter(mApiMeeting.filteringOptions(mDateToFilter)));
     }
 
