@@ -175,13 +175,11 @@ public class MainMeetingActivity extends AppCompatActivity implements DatePicker
         });
     }
 
-    /**
-     * this dialog box is to high for me. I'll try to find something else...but it work
-     */
+
     private void dialogBoxForPlaceNameFiltering() {
-        List<String> fakePlaceNames = new ArrayList<>(mApiPlace.getPlaceNames());
-        String[] placeNamesToFiltered = new String[fakePlaceNames.size()];
-        fakePlaceNames.toArray(placeNamesToFiltered);
+        List<String> placeNames = new ArrayList<>(mApiPlace.getPlaceNames());
+        String[] placeNamesToFiltered = new String[placeNames.size()];
+        placeNames.toArray(placeNamesToFiltered);
         final String[] places = new String[1];
         final AlertDialog.Builder builderRoom = new AlertDialog.Builder(this);
         builderRoom.setTitle("Choisissez une Salle");

@@ -40,7 +40,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,7 +132,6 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             } else {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                 startTimeDialogBox.setText(null);
-
             }
 
         } else if (selectedTime == 1) {
@@ -146,6 +144,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 e.printStackTrace();
             }
 
+            assert timeDateEnd != null;
             if (timeDateStart == null || timeDateEnd.after(timeDateStart)) {
                 endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
                 mMeetingEndHour = String.valueOf(endTimeDialogBox);
@@ -243,6 +242,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
             if (!mail.matches(".+@.+\\.[a-z]+")) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
+
             } else if ("".equals(mParticipants)) {
                 mParticipants = mail;
                 addMailToMailsList();
@@ -297,10 +297,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         List<Meeting> mMeetingDisponibility = new ArrayList<>();
         List<Meeting> mMeetings = mApiMeeting.getMeeting();
 
-        if (mMeetings.size() == 0) {
-            addNewMeeting();
+        if (mMeetings.size() != 0) {
 
-        } else {
             if (mMeetingDisponibility.size() < 1) {
                 for (browseMeeting = 0; browseMeeting < mMeetings.size(); browseMeeting++) {
                     if (mMeetings.get(browseMeeting).getMeetingPlaceName().equals(mMeetingPlace)
@@ -310,15 +308,20 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                     }
                 }
             }
-
-            if (mMeetingDisponibility.size() == 0) {
-                addNewMeeting();
-
-            } else {
-                Toast.makeText(AddNewMeetingActivity.this, "A la date choisie cette salle ne sera disponible qu'aprés " + mMeetings.get(browseMeeting - 1).getMeetingEndHour(), Toast.LENGTH_LONG).show();
+            if (mMeetingDisponibility.size() != 0) {
+                Toast.makeText(AddNewMeetingActivity.this,
+                        "A la date choisie cette salle est déja occupée par la réunion \"" +
+                                mMeetings.get(browseMeeting - 1).getMeetingSubject() +
+                                "\" et ne sera disponible qu'aprés " +
+                                mMeetings.get(browseMeeting - 1).getMeetingEndHour(), Toast.LENGTH_LONG).show();
                 startTimeDialogBox.setText(null);
                 mMeetingStartHour = "";
+            } else {
+                addNewMeeting();
             }
+
+        } else {
+            addNewMeeting();
         }
     }
 }

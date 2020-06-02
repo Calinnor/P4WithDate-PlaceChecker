@@ -20,4 +20,9 @@
     <string name="deletebuttonimage">DeleteButtonImage</string>
     <string name="place_name">place_name</string>
     <string name="heure_de_fin">Heure de fin</string>
+    <string name="retour">Retour</string>
+    <string name="filtrer">Filtrer</string>
+    <string name="toutes_les_r_unions">Toutes les réunions</string>
+    <string name="filtrer_les_r_unions_par_date">Filtrer les réunions par date</string>
+    <string name="filtrer_les_r_unions_par_lieu">Filtrer les réunions par lieu</string>
 </resources>

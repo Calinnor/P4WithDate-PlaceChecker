@@ -96,23 +96,23 @@ public class AddNewMeetingTest {
     }
 
     @Test
-    public void clickOnPlaceChoiceButton_displaySpinnerPlace(){
+    public void clickOnPlaceChoiceButton_displaySpinnerPlace() {
         onView(withId(R.id.spinner_place)).perform(click());
         onData(anything()).atPosition(0).perform(click());
         onView(withId(R.id.place_choice)).check(matches(withText(containsString("Salle 1"))));
     }
 
     @Test
-    public void clickOnHourChoiceButton_AndSelect_ThenTimePicker_DisplayChoiceHour_InTextView(){
-       onView(withId(R.id.time_start_dialogbox)).perform(click());
-       onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
-       onView(withId(android.R.id.button1)).perform(click());
+    public void clickOnHourChoiceButton_AndSelect_ThenTimePicker_DisplayChoiceHour_InTextView() {
+        onView(withId(R.id.time_start_dialogbox)).perform(click());
+        onView(isAssignableFrom(TimePicker.class)).perform(setTime(10, 10));
+        onView(withId(android.R.id.button1)).perform(click());
         onView(withId(R.id.time_start_dialogbox)).check(matches(allOf(withText("10H10"),
                 isDisplayed())));
     }
 
     @Test
-    public void clickOnDateChoiceButton_AndSelect_ThenDatePicker_DisplayDateChoice_InTextView(){
+    public void clickOnDateChoiceButton_AndSelect_ThenDatePicker_DisplayDateChoice_InTextView() {
         onView(withId(R.id.enterDate)).perform(click());
         onView(isAssignableFrom(DatePicker.class)).perform(setDate(1980, 10, 30));
         onView(withId(android.R.id.button1)).perform(click());
@@ -121,13 +121,13 @@ public class AddNewMeetingTest {
     }
 
     @Test
-    public void clickOnReturnButton_displayMainMeeting(){
+    public void clickOnReturnButton_displayMainMeeting() {
         onView(withId(R.id.back_button_add_meeting)).perform(click());
         onView(withId(R.id.add_meeting)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void saveButton_display_mainMeetingActivity_andAddMeeting_onceAllInformations_get(){
+    public void saveButton_display_mainMeetingActivity_andAddMeeting_onceAllInformations_get() {
 
         onView(withId(R.id.meeting_object)).perform(replaceText("Test"));
 

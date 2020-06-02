@@ -42,10 +42,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:orientation="vertical">-->
 
                 <include layout="@layout/toolbar_meeting" />
 
@@ -54,16 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layoutManager="LinearLayoutManager" />
-            </LinearLayout>
-
-            <!--            <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-            <!--                android:id="@+id/add_meeting"-->
-            <!--                android:layout_width="wrap_content"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginRight="16dp"-->
-            <!--                android:layout_gravity="end"-->
-            <!--                app:backgroundTint="#DA0323"-->
-            <!--                app:srcCompat="@drawable/ic_add_white_24dp" />-->
+<!--            </LinearLayout>-->
         </LinearLayout>
     </ScrollView>
 

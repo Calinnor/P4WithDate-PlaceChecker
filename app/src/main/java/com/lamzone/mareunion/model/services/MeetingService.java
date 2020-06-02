@@ -20,11 +20,17 @@ public class MeetingService implements ApiMeeting {
 
     @Override
     public void deleteMeeting(Meeting meeting) {
+        if (meeting == null) {
+            throw new IllegalArgumentException("Meeting may not be null");
+        }
         mMeetings.remove(meeting);
     }
 
     @Override
     public void addNewMeeting(Meeting meeting) {
+        if (meeting == null) {
+            throw new IllegalArgumentException("Meeting may not be null");
+        }
         mMeetings.add(meeting);
     }
 

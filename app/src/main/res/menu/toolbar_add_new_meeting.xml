@@ -6,7 +6,7 @@
         android:id="@+id/back_button_add_meeting"
         android:icon="@drawable/ic_arrow_back_white_24dp"
         app:showAsAction="ifRoom"
-        android:title="Retour">
+        android:title="@string/retour">
     </item>
 
 </menu>

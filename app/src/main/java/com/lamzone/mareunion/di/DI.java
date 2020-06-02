@@ -6,7 +6,7 @@ import com.lamzone.mareunion.model.services.MeetingService;
 import com.lamzone.mareunion.model.services.PlaceService;
 
 /**
- * create instance of FakeMeetingService using ApiService service
+ * create instance of FakeMeetingService using ApiService service//local plutot que fake
  */
 public class DI {
 

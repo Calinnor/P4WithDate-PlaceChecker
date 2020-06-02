@@ -3,6 +3,11 @@ package com.lamzone.mareunion.utils;
 public class DateUtils {
 
 
+    /**
+     * provide standard display in all resources app
+     */
+
+
     public static String timePickerSet(int hourOfDay, int minute) {
         String timeDialogBox;
 
@@ -17,8 +22,6 @@ public class DateUtils {
         }
         return timeDialogBox;
     }
-
-
 
 
     public static String datePickerSet(int year, int month, int dayOfMonth) {

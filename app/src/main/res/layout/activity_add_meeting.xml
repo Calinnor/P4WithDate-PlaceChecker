@@ -163,7 +163,7 @@
                     <LinearLayout
                         android:id="@+id/layout_participants_mails"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="0dp"
                         android:layout_weight="100"
                         android:background="#F7F5F8"
                         android:orientation="horizontal">
@@ -200,15 +200,6 @@
                         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                         tools:listitem="@layout/fragment_mail" />
                 </LinearLayout>
-                <!--a ameliorer !!!-->
-                <!--                <Button-->
-                <!--                    android:id="@+id/createNewMeeting"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_gravity="center"-->
-                <!--                    android:text="Sauvegardez la réunion"-->
-                <!--                    android:textColor="#322D39"-->
-                <!--                    android:textStyle="bold" />-->
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/createNewMeeting"

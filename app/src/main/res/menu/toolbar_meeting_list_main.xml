@@ -5,26 +5,26 @@
         android:id="@+id/filter_button"
         android:icon="@drawable/ic_filter_list_white_24dp"
         app:showAsAction="ifRoom"
-        android:title="Filtrer">
+        android:title="@string/filtrer">
 
         <menu>
 
             <item
                 android:id="@+id/filter_all_meeting"
                 android:orderInCategory="100"
-                android:title="Toutes les réunions"
+                android:title="@string/toutes_les_r_unions"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/filter_meeting_by_date"
                 android:orderInCategory="100"
-                android:title="Filtrer les réunions par date"
+                android:title="@string/filtrer_les_r_unions_par_date"
                 app:showAsAction="never" />
 
             <item
                 android:id="@+id/filter_meeting_by_place"
                 android:orderInCategory="100"
-                android:title="Filtrer les réunions par lieu"
+                android:title="@string/filtrer_les_r_unions_par_lieu"
                 app:showAsAction="never" />
 
         </menu>

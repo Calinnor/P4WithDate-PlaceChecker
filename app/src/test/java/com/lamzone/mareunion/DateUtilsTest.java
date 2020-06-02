@@ -5,10 +5,10 @@ import com.lamzone.mareunion.utils.DateUtils;
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
-public class DateUtilsTests {
+public class DateUtilsTest {
 
     @Test
-    public void timePickerSetModifyTimeDisplayWithSucces() {
+    public void timePickerSetModifyTimeDisplayWithSuccess() {
         String timeDialogBox = DateUtils.timePickerSet(5, 8);
         assertTrue(timeDialogBox.contains("05H08"));
         timeDialogBox = DateUtils.timePickerSet(15, 8);
@@ -18,9 +18,10 @@ public class DateUtilsTests {
         timeDialogBox = DateUtils.timePickerSet(15, 18);
         assertTrue(timeDialogBox.contains("15H18"));
     }
+    //plus cas negatifs
 
     @Test
-    public void datePickerSetModifyDateDisplayWithSucces() {
+    public void datePickerSetModifyDateDisplayWithSuccess() {
         String enterDate = DateUtils.datePickerSet(20, 5, 6);
         assertTrue(enterDate.contains("06/05/20"));
         enterDate = DateUtils.datePickerSet(20, 6, 15);
