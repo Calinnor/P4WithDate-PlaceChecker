@@ -130,6 +130,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 mMeetingStartHour = DateUtils.timePickerSet(hourOfDay, minute);
 
             } else {
+                startTimeDialogBox.setError("Entrez une heure valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                 startTimeDialogBox.setText(null);
             }
@@ -150,6 +151,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 mMeetingEndHour = String.valueOf(endTimeDialogBox);
 
             } else {
+                endTimeDialogBox.setError("Entrez une heure valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin précédant l'heure de début.", Toast.LENGTH_LONG).show();
                 endTimeDialogBox.setText(null);
 
@@ -241,6 +243,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             String mail = mEnterParticipantMail.getText() + "";
 
             if (!mail.matches(".+@.+\\.[a-z]+")) {
+                mEnterParticipantMail.setError("Entrez un mail valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
 
             } else if ("".equals(mParticipants)) {
@@ -261,8 +264,24 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private void saveNewMeeting() {
         saveButton.setOnClickListener(v -> {
             mObjectOfMeeting = String.valueOf(meetingObject.getText());
-            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingStartHour) || "".equals(mMeetingEndHour) || "".equals(mMeetingDate) || "".equals(mMeetingPlace) || "".equals(mParticipants)) {
+            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingStartHour) || "".equals(mMeetingEndHour) || "".equals(mMeetingDate) /*|| "".equals(mMeetingPlace)*/ || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
+                if ("".equals(mObjectOfMeeting)){
+                    meetingObject.setError("Entrez un sujet de réunion.");
+                }
+                if ("".equals(mMeetingStartHour)){
+                    startTimeDialogBox.setError("Entrez une heure de début de réunion valide.");
+                }
+                if ("".equals(mMeetingEndHour)){
+                    endTimeDialogBox.setError("Entrez une heure de fin de réunion valide.");
+                }
+                if ("".equals(mMeetingDate)){
+                    enterDate.setError("Entrez une date de réunion valide.");
+                }
+                if ("".equals(mParticipants)){
+                    mEnterParticipantMail.setError("Entrez un sujet de réunion.");
+                }
+
             } else {
                 meetingDisponibility();
             }
@@ -309,6 +328,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 }
             }
             if (mMeetingDisponibility.size() != 0) {
+                startTimeDialogBox.setError("Entrez une heure valide");
                 Toast.makeText(AddNewMeetingActivity.this,
                         "A la date choisie cette salle est déja occupée par la réunion \"" +
                                 mMeetings.get(browseMeeting - 1).getMeetingSubject() +
@@ -324,6 +344,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
             addNewMeeting();
         }
     }
+
 }
 
 

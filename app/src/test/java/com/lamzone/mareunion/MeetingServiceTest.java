@@ -7,7 +7,6 @@ import com.lamzone.mareunion.model.items.Meeting;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -19,11 +18,9 @@ import static org.junit.Assert.assertTrue;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class MeetingServicesTest {
+public class MeetingServiceTest {
 
     private ApiMeeting mApiMeeting;
-    private List<Meeting> mMeetingDateFiltered = new ArrayList<>();
-    private List<Meeting> mMeetingPlaceFiltered = new ArrayList<>();
 
     Meeting meetingOne = new Meeting(R.drawable.bleu,
             "Test réunion: Objet ",
@@ -79,12 +76,13 @@ public class MeetingServicesTest {
     @Test
     public void getMeetingWithNoSuccess() {
         mApiMeeting.addNewMeeting(meetingOne);
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingDate().contains("17/06/21"));
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingStartHour().contains("- 9h30 -"));
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingEndHour().contains("1h00"));
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingPlaceName().contains("Salle 2"));
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingParticipantsInformations().contains("Jacky@Email - Joel@Email - Jess@Email"));
-        assertFalse(mApiMeeting.getMeeting().get(0).getMeetingSubject().contains("Test réunion: Objet 2"));
+        Meeting loadedMeeting = mApiMeeting.getMeeting().get(0);
+        assertFalse(loadedMeeting.getMeetingDate().contains("17/06/21"));
+        assertFalse(loadedMeeting.getMeetingStartHour().contains("- 9h30 -"));
+        assertFalse(loadedMeeting.getMeetingEndHour().contains("1h00"));
+        assertFalse(loadedMeeting.getMeetingPlaceName().contains("Salle 2"));
+        assertFalse(loadedMeeting.getMeetingParticipantsInformations().contains("Jacky@Email - Joel@Email - Jess@Email"));
+        assertFalse(loadedMeeting.getMeetingSubject().contains("Test réunion: Objet 2"));
         assertTrue(mApiMeeting.getMeeting().contains(meetingOne));
     }
 
@@ -124,14 +122,16 @@ public class MeetingServicesTest {
     @Test
     public void filterDateWithSuccess() {
         mApiMeeting.addNewMeeting(meetingOne);
-        mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/21");
+        List<Meeting> mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/21");
+        assertEquals(1, mMeetingDateFiltered.size());
         assertTrue(mMeetingDateFiltered.contains(meetingOne));
     }
 
     @Test
     public void filterDateWithNoSucces() {
         mApiMeeting.addNewMeeting(meetingOne);
-        mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/22");
+        List<Meeting> mMeetingDateFiltered = mApiMeeting.filteringOptions("17/05/22");
+        assertEquals(1, mMeetingDateFiltered.size());
         assertFalse(mMeetingDateFiltered.contains(meetingOne));
     }
 
@@ -141,14 +141,16 @@ public class MeetingServicesTest {
     @Test
     public void filterPlaceNameWithSuccess() {
         mApiMeeting.addNewMeeting(meetingOne);
-        mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 1");
+        List<Meeting> mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 1");
+        assertEquals(1, mMeetingPlaceFiltered.size());
         assertTrue(mMeetingPlaceFiltered.contains(meetingOne));
     }
 
     @Test
     public void filterPlaceNameWithNoSuccess() {
         mApiMeeting.addNewMeeting(meetingOne);
-        mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 3");
+        List<Meeting> mMeetingPlaceFiltered = mApiMeeting.filteringOptions("Salle 3");
+        assertEquals(0, mMeetingPlaceFiltered.size());
         assertFalse(mMeetingPlaceFiltered.contains(meetingOne));
     }
 

@@ -33,9 +33,6 @@ public class DateUtilsTest {
         assertNotEquals("15 H 18", timeDialogBox);
     }
 
-
-    //plus cas negatifs
-
     @Test
     public void datePickerSetModifyDateDisplayWithSuccess() {
         String enterDate = DateUtils.datePickerSet(20, 5, 6);
