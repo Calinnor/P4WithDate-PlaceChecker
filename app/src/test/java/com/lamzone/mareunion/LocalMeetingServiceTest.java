@@ -128,10 +128,10 @@ public class LocalMeetingServiceTest {
     }
 
     @Test
-    public void filterDateWithNoSucces() {
+    public void filterDateWithNoSuccess() {
         mLocalApiMeeting.addNewMeeting(meetingOne);
         List<Meeting> mMeetingDateFiltered = mLocalApiMeeting.filteringOptions("17/05/22");
-        assertEquals(1, mMeetingDateFiltered.size());
+        assertEquals(0, mMeetingDateFiltered.size());
         assertFalse(mMeetingDateFiltered.contains(meetingOne));
     }
 
