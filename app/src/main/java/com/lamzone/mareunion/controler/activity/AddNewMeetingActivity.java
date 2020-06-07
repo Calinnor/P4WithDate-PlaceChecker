@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,8 +29,8 @@ import com.lamzone.mareunion.R;
 import com.lamzone.mareunion.controler.fragment.DatePickerFragment;
 import com.lamzone.mareunion.controler.fragment.TimePickeFragment;
 import com.lamzone.mareunion.di.DI;
-import com.lamzone.mareunion.model.services.ApiMeeting;
-import com.lamzone.mareunion.model.services.ApiPlace;
+import com.lamzone.mareunion.model.services.LocalApiMeeting;
+import com.lamzone.mareunion.model.services.LocalApiPlace;
 import com.lamzone.mareunion.model.items.Meeting;
 import com.lamzone.mareunion.model.items.PlaceItem;
 import com.lamzone.mareunion.utils.DateUtils;
@@ -47,8 +49,8 @@ import butterknife.ButterKnife;
 
 public class AddNewMeetingActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener, DatePickerDialog.OnDateSetListener, MailListRecyclerViewAdapter.MailsToDelete {
 
-    private ApiMeeting mApiMeeting;
-    private ApiPlace mApiPlace;
+    private LocalApiMeeting mLocalApiMeeting;
+    private LocalApiPlace mLocalApiPlace;
 
     private Date timeDateStart;
     private Date timeDateEnd;
@@ -104,8 +106,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         ButterKnife.bind(this);
         configureRecyclerView();
         onAddMailButtonClick();
-        mApiMeeting = DI.getMeetingApi();
-        mApiPlace = DI.getApiPlace();
+        mLocalApiMeeting = DI.getMeetingApi();
+        mLocalApiPlace = DI.getApiPlace();
         addDateToMeeting();
         addEndTimeToMeeting();
         addStartTimeToMeeting();
@@ -118,6 +120,9 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         if (selectedTime == 0) {
+
+            textViewListerner(startTimeDialogBox);
+
             startTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
             String startingHour = hourOfDay + ":" + minute;
             try {
@@ -130,12 +135,13 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 mMeetingStartHour = DateUtils.timePickerSet(hourOfDay, minute);
 
             } else {
-                startTimeDialogBox.setError("Entrez une heure valide");
+                startTimeDialogBox.setError("Entrez une heure de début valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin precedant l'heure de début.", Toast.LENGTH_LONG).show();
                 startTimeDialogBox.setText(null);
             }
 
         } else if (selectedTime == 1) {
+            textViewListerner(endTimeDialogBox);
 
             String endingHour = hourOfDay + ":" + minute;
             endTimeDialogBox.setText(DateUtils.timePickerSet(hourOfDay, minute));
@@ -151,16 +157,16 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 mMeetingEndHour = String.valueOf(endTimeDialogBox);
 
             } else {
-                endTimeDialogBox.setError("Entrez une heure valide");
+                endTimeDialogBox.setError("Entrez une heure de fin valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous ne pouvez pas avoir une heure de fin précédant l'heure de début.", Toast.LENGTH_LONG).show();
                 endTimeDialogBox.setText(null);
-
             }
         }
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        textViewListerner(enterDate);
         enterDate.setText(DateUtils.datePickerSet(year, month + 1, dayOfMonth));
         mMeetingDate = DateUtils.datePickerSet(year, month + 1, dayOfMonth);
     }
@@ -175,7 +181,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
                 enterDate.getText().toString(),
                 dateDisponibility = timeDateEnd.getTime()
         );
-        mApiMeeting.addNewMeeting(meeting);
+        mLocalApiMeeting.addNewMeeting(meeting);
         finish();
     }
 
@@ -204,7 +210,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
 
 
     private void initPlacesList() {
-        mPlaceItemsList = new ArrayList<>(mApiPlace.getPlaceItem());
+        mPlaceItemsList = new ArrayList<>(mLocalApiPlace.getPlaceItem());
     }
 
     private void addNewPlace() {
@@ -242,6 +248,8 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         mAddMailsButton.setOnClickListener(view -> {
             String mail = mEnterParticipantMail.getText() + "";
 
+            editTextListerner(mEnterParticipantMail);
+
             if (!mail.matches(".+@.+\\.[a-z]+")) {
                 mEnterParticipantMail.setError("Entrez un mail valide");
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir un mail valide avant de sauvegarder les informations.", Toast.LENGTH_SHORT).show();
@@ -264,22 +272,22 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private void saveNewMeeting() {
         saveButton.setOnClickListener(v -> {
             mObjectOfMeeting = String.valueOf(meetingObject.getText());
-            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingStartHour) || "".equals(mMeetingEndHour) || "".equals(mMeetingDate) /*|| "".equals(mMeetingPlace)*/ || "".equals(mParticipants)) {
+            if ("".equals(mObjectOfMeeting) || "".equals(mMeetingStartHour) || "".equals(mMeetingEndHour) || "".equals(mMeetingDate) || "".equals(mParticipants)) {
                 Toast.makeText(AddNewMeetingActivity.this, "Vous devez remplir toutes les informations avant de sauvegarder une réunion.", Toast.LENGTH_LONG).show();
-                if ("".equals(mObjectOfMeeting)){
+                if ("".equals(mObjectOfMeeting)) {
                     meetingObject.setError("Entrez un sujet de réunion.");
                 }
-                if ("".equals(mMeetingStartHour)){
-                    startTimeDialogBox.setError("Entrez une heure de début de réunion valide.");
+                if ("".equals(mMeetingStartHour)) {
+                    startTimeDialogBox.setError("Entrez une heure de début");
                 }
-                if ("".equals(mMeetingEndHour)){
-                    endTimeDialogBox.setError("Entrez une heure de fin de réunion valide.");
+                if ("".equals(mMeetingEndHour)) {
+                    endTimeDialogBox.setError("Entrez une heure de fin");
                 }
-                if ("".equals(mMeetingDate)){
-                    enterDate.setError("Entrez une date de réunion valide.");
+                if ("".equals(mMeetingDate)) {
+                    enterDate.setError("Entrez une date");
                 }
-                if ("".equals(mParticipants)){
-                    mEnterParticipantMail.setError("Entrez un sujet de réunion.");
+                if ("".equals(mParticipants)) {
+                    mEnterParticipantMail.setError("Entrez un mail valide.");
                 }
 
             } else {
@@ -314,7 +322,7 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
     private void meetingDisponibility() {
         dateDisponibility = timeDateStart.getTime();
         List<Meeting> mMeetingDisponibility = new ArrayList<>();
-        List<Meeting> mMeetings = mApiMeeting.getMeeting();
+        List<Meeting> mMeetings = mLocalApiMeeting.getMeeting();
 
         if (mMeetings.size() != 0) {
 
@@ -343,6 +351,50 @@ public class AddNewMeetingActivity extends AppCompatActivity implements TimePick
         } else {
             addNewMeeting();
         }
+    }
+
+    private void editTextListerner(EditText listerner) {
+        listerner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (listerner.getText().length() > 0) {
+                    listerner.setError(null);
+                }
+            }
+
+        });
+    }
+
+    private void textViewListerner(TextView listerner) {
+        listerner.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (listerner.getText().length() > 0) {
+                    listerner.setError(null);
+                }
+            }
+
+        });
     }
 
 }

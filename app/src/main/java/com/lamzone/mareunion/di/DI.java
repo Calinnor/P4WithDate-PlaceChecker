@@ -1,40 +1,40 @@
 package com.lamzone.mareunion.di;
 
-import com.lamzone.mareunion.model.services.ApiMeeting;
-import com.lamzone.mareunion.model.services.ApiPlace;
-import com.lamzone.mareunion.model.services.MeetingService;
-import com.lamzone.mareunion.model.services.PlaceService;
+import com.lamzone.mareunion.model.services.LocalApiMeeting;
+import com.lamzone.mareunion.model.services.LocalApiPlace;
+import com.lamzone.mareunion.model.services.LocalMeetingService;
+import com.lamzone.mareunion.model.services.PlaceServiceLocal;
 
 /**
- * create instance of FakeMeetingService using ApiService service//local plutot que fake
+ * create instance of LocalMeetingService using ApiService service
  */
 public class DI {
 
     /**
-     * implemente FakeApi
+     * implement FakeApi
      */
-    private static ApiMeeting mMeetingApi = new MeetingService();
-    private static ApiPlace mApiPlace = new PlaceService();
+    private static LocalApiMeeting mMeetingApi = new LocalMeetingService();
+    private static LocalApiPlace mLocalApiPlace = new PlaceServiceLocal();
 
     /**
      * @return an instance of FakeApi. Usable in app to collect values
      */
-    public static ApiMeeting getMeetingApi() {
+    public static LocalApiMeeting getMeetingApi() {
         return mMeetingApi;
     }
 
-    public static ApiPlace getApiPlace() {
-        return mApiPlace;
+    public static LocalApiPlace getApiPlace() {
+        return mLocalApiPlace;
     }
 
     /**
      * @return a new instance of DummyMeetingService. Usable with tests
      */
-    public static ApiMeeting getNewInstanceApi() {
-        return new MeetingService();
+    public static LocalApiMeeting getNewInstanceApi() {
+        return new LocalMeetingService();
     }
 
-    public static ApiPlace getNewInstancePlaceApi() {
-        return new PlaceService();
+    public static LocalApiPlace getNewInstancePlaceApi() {
+        return new PlaceServiceLocal();
     }
 }

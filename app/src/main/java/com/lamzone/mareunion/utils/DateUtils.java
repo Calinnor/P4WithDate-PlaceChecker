@@ -4,7 +4,7 @@ public class DateUtils {
 
 
     /**
-     * provide standard display in all resources app
+     * provide standard time and hour display in all resources app
      */
 
 

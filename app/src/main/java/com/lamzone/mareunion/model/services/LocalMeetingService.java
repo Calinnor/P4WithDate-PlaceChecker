@@ -5,7 +5,7 @@ import com.lamzone.mareunion.model.items.Meeting;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MeetingService implements ApiMeeting {
+public class LocalMeetingService implements LocalApiMeeting {
 
     private List<Meeting> mMeetings = new ArrayList<>();
 

@@ -31,7 +31,7 @@ public class DatePickerFragment extends DialogFragment {
         DatePickerDialog dialogDate = new DatePickerDialog(Objects.requireNonNull(getActivity()), (DatePickerDialog.OnDateSetListener) getActivity(), day, month, year);
 
         /**
-         * here i enter the methode minDate with currentmillis in param (today all the time) thks to alph who show me the way
+         * here i enter the method minDate with currentTimeMillis in param (today all the time) thks to alph who show me the way
          */
         dialogDate.getDatePicker().setMinDate(System.currentTimeMillis());
         return dialogDate;

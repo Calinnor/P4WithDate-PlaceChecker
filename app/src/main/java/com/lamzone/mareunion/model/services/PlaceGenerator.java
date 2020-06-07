@@ -9,6 +9,10 @@ import java.util.List;
 
 class PlaceGenerator {
 
+    /**
+     * using it when have to work with place
+     */
+
     private static List<PlaceItem> PLACE = Arrays.asList(
             new PlaceItem(R.drawable.bleumarbre, "1"),
             new PlaceItem(R.drawable.rose, "2"),

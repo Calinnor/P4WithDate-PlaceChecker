@@ -104,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="50"
+                        android:layout_weight="46"
                         android:gravity="center"
                         android:hint="@string/date_de_la_reunion"
                         android:padding="2dp"
@@ -115,7 +115,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="50"
+                        android:layout_weight="54"
                         android:orientation="vertical"
                         android:weightSum="100">
 
@@ -125,7 +125,7 @@
                             android:layout_height="0dp"
                             android:layout_margin="2dp"
                             android:layout_weight="50"
-                            android:background="#F7F5F8"
+                            android:background="#F8F5F5"
                             android:gravity="center"
                             android:hint="@string/heure_de_debut"
                             android:padding="2dp"

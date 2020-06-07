@@ -4,7 +4,7 @@ import com.lamzone.mareunion.model.items.Meeting;
 
 import java.util.List;
 
-public interface ApiMeeting {
+public interface LocalApiMeeting {
 
     List<Meeting> getMeeting();
 

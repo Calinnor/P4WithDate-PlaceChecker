@@ -3,8 +3,8 @@ package com.lamzone.mareunion;
 import com.lamzone.mareunion.di.DI;
 import com.lamzone.mareunion.model.items.Meeting;
 import com.lamzone.mareunion.model.items.PlaceItem;
-import com.lamzone.mareunion.model.services.ApiMeeting;
-import com.lamzone.mareunion.model.services.ApiPlace;
+import com.lamzone.mareunion.model.services.LocalApiMeeting;
+import com.lamzone.mareunion.model.services.LocalApiPlace;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +19,8 @@ import static org.junit.Assert.assertTrue;
 
 public class PlaceServiceTest {
 
-    private ApiPlace mApiPlace;
-    private ApiMeeting apiMeeting;
+    private LocalApiPlace mLocalApiPlace;
+    private LocalApiMeeting localApiMeeting;
 
     private List<Meeting> mMeetingPlaceFiltered = new ArrayList<>();
 
@@ -35,8 +35,8 @@ public class PlaceServiceTest {
 
     @Before
     public void setupMeeting() {
-        mApiPlace = DI.getNewInstancePlaceApi();
-        apiMeeting = DI.getNewInstanceApi();
+        mLocalApiPlace = DI.getNewInstancePlaceApi();
+        localApiMeeting = DI.getNewInstanceApi();
     }
 
     /**
@@ -44,21 +44,21 @@ public class PlaceServiceTest {
      */
     @Test
     public void getPlaceWithSuccess() {
-        assertEquals(mApiPlace.getPlaceItem().size(), 10);
-        assertTrue(mApiPlace.getPlaceItem().get(1).getmPlaceName().contains("2"));
+        assertEquals(mLocalApiPlace.getPlaceItem().size(), 10);
+        assertTrue(mLocalApiPlace.getPlaceItem().get(1).getmPlaceName().contains("2"));
     }
 
     @Test
     public void getPlaceWithNoSuccess(){
-        PlaceItem expectedPlaceItem = mApiPlace.getPlaceItem().get(0);
+        PlaceItem expectedPlaceItem = mLocalApiPlace.getPlaceItem().get(0);
         assertNotNull(expectedPlaceItem);
         assertFalse(expectedPlaceItem.getmPlaceName().contains("3"));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void getPlaceItemOutOfList() {
-        PlaceItem expectedPlaceItem = mApiPlace.getPlaceItem().get(mApiPlace.getPlaceItem().size() + 1);
-        assertTrue(mApiPlace.getPlaceItem().contains(expectedPlaceItem));
+        PlaceItem expectedPlaceItem = mLocalApiPlace.getPlaceItem().get(mLocalApiPlace.getPlaceItem().size() + 1);
+        assertTrue(mLocalApiPlace.getPlaceItem().contains(expectedPlaceItem));
     }
 
     /**
@@ -66,20 +66,20 @@ public class PlaceServiceTest {
      */
     @Test(expected = IndexOutOfBoundsException.class)
     public void getPlaceNameOutOfList() {
-        String exceptedPlaceName = mApiPlace.getPlaceNames().get(12);
-        assertTrue(mApiPlace.getPlaceNames().contains(exceptedPlaceName));
+        String exceptedPlaceName = mLocalApiPlace.getPlaceNames().get(12);
+        assertTrue(mLocalApiPlace.getPlaceNames().contains(exceptedPlaceName));
     }
 
     @Test
     public void getPlaceNameWithSuccess() {
-        assertTrue(mApiPlace.getPlaceNames().get(3).contains("4"));
-        assertTrue(mApiPlace.getPlaceNames().get(2).contains("3"));
+        assertTrue(mLocalApiPlace.getPlaceNames().get(3).contains("4"));
+        assertTrue(mLocalApiPlace.getPlaceNames().get(2).contains("3"));
     }
 
     @Test
     public void getPlaceNameWithNoSuccess() {
-        assertFalse(mApiPlace.getPlaceNames().get(6).contains("5"));
-        assertFalse(mApiPlace.getPlaceNames().get(4).contains("2"));
+        assertFalse(mLocalApiPlace.getPlaceNames().get(6).contains("5"));
+        assertFalse(mLocalApiPlace.getPlaceNames().get(4).contains("2"));
     }
 
     /**
@@ -87,15 +87,15 @@ public class PlaceServiceTest {
      */
     @Test
     public void filterPlaceNameWithSuccess() {
-        apiMeeting.addNewMeeting(meetingOne);
-        mMeetingPlaceFiltered = apiMeeting.filteringOptions("Salle 1");
+        localApiMeeting.addNewMeeting(meetingOne);
+        mMeetingPlaceFiltered = localApiMeeting.filteringOptions("Salle 1");
         assertTrue(mMeetingPlaceFiltered.contains(meetingOne));
     }
 
     @Test
     public void filterPlaceNameWithNoSuccess() {
-        apiMeeting.addNewMeeting(meetingOne);
-        mMeetingPlaceFiltered = apiMeeting.filteringOptions("Salle 3");
+        localApiMeeting.addNewMeeting(meetingOne);
+        mMeetingPlaceFiltered = localApiMeeting.filteringOptions("Salle 3");
     }
 
 }
