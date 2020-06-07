@@ -104,7 +104,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:layout_weight="46"
+                        android:layout_weight="44"
                         android:gravity="center"
                         android:hint="@string/date_de_la_reunion"
                         android:padding="2dp"
@@ -115,7 +115,7 @@
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="54"
+                        android:layout_weight="56"
                         android:orientation="vertical"
                         android:weightSum="100">
 
